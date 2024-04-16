@@ -4,6 +4,85 @@
   
     
     <entry>
+      <title>rsync安装和配置</title>
+      <link href="/2024/04/16/%E7%AC%94%E8%AE%B0/linux/shell/"/>
+      <url>/2024/04/16/%E7%AC%94%E8%AE%B0/linux/shell/</url>
+      
+        <content type="html"><![CDATA[<h4 id="批量获取ip地址的"><a href="#批量获取ip地址的" class="headerlink" title="批量获取ip地址的"></a>批量获取ip地址的</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ip a s ens33 | awk -F &#x27;[ /]+&#x27; &#x27;NR==3&#123;print $3&#125;&#x27;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux - 笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>rsync安装和配置</title>
+      <link href="/2024/04/16/%E7%AC%94%E8%AE%B0/linux/nfs/"/>
+      <url>/2024/04/16/%E7%AC%94%E8%AE%B0/linux/nfs/</url>
+      
+        <content type="html"><![CDATA[<h3 id="rsync报错解决rsync-mkstemp-failed-Permission-denied-13"><a href="#rsync报错解决rsync-mkstemp-failed-Permission-denied-13" class="headerlink" title="rsync报错解决rsync: mkstemp *******  failed: Permission denied (13)"></a>rsync报错解决rsync: mkstemp *******  failed: Permission denied (13)</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@backup tmp]<span class="comment">#rsync -avz /etc/hostname rsync_backup@10.0.0.41::data</span></span><br><span class="line">Password: </span><br><span class="line">sending incremental file list</span><br><span class="line">hostname</span><br><span class="line">rsync: mkstemp <span class="string">&quot;.hostname.Qo7WQD&quot;</span> (<span class="keyword">in</span> data) failed: Permission denied (13)</span><br><span class="line"></span><br><span class="line">sent 101 bytes  received 122 bytes  63.71 bytes/sec</span><br><span class="line">total size is 7  speedup is 0.03</span><br><span class="line">rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1179) [sender=3.1.2]</span><br></pre></td></tr></table></figure><h4 id="1-data文件夹权限问题"><a href="#1-data文件夹权限问题" class="headerlink" title="1.data文件夹权限问题"></a>1.data文件夹权限问题</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@backup data]<span class="comment"># ls -ld</span></span><br><span class="line">drwxr-xr-x. 2 root root 6 Apr 13 01:16 .</span><br></pre></td></tr></table></figure><p>使用 <strong>sudo chmod 777 &#x2F;data</strong>即可</p><h4 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h4>]]></content>
+      
+      
+      <categories>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 笔记 </tag>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>ansible安装和配置</title>
+      <link href="/2024/04/16/%E7%AC%94%E8%AE%B0/linux/ansible/"/>
+      <url>/2024/04/16/%E7%AC%94%E8%AE%B0/linux/ansible/</url>
+      
+        <content type="html"><![CDATA[<h3 id="检查epel是否安装，没安装即安装"><a href="#检查epel是否安装，没安装即安装" class="headerlink" title="检查epel是否安装，没安装即安装"></a>检查epel是否安装，没安装即安装</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum list | grep epel-release</span><br><span class="line">yum install -y epel-release</span><br></pre></td></tr></table></figure><h3 id="配置epel清华镜像源"><a href="#配置epel清华镜像源" class="headerlink" title="配置epel清华镜像源"></a>配置epel清华镜像源</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sed -e &#x27;s!^metalink=!#metalink=!g&#x27;     -e &#x27;s!^#baseurl=!baseurl=!g&#x27;     -e &#x27;s!https\?://download\.fedoraproject\.org/pub/epel!https://mirrors.tuna.tsinghua.edu.cn/epel!g&#x27;     -e &#x27;s!https\?://download\.example/pub/epel!https://mirrors.tuna.tsinghua.edu.cn/epel!g&#x27;     -i /etc/yum.repos.d/epel&#123;,-testing&#125;.repo</span><br><span class="line">yum update</span><br></pre></td></tr></table></figure><h3 id="安装ansible"><a href="#安装ansible" class="headerlink" title="安装ansible"></a>安装ansible</h3><ul><li><strong>yum install ansible –y</strong></li></ul><h3 id="修改配置ansible配置文件"><a href="#修改配置ansible配置文件" class="headerlink" title="修改配置ansible配置文件"></a>修改配置ansible配置文件</h3><p><strong>vim &#x2F;etc&#x2F;ansible&#x2F;ansible.cfg</strong>修改这个文件即可</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">71:host_key_checking = False </span><br><span class="line">111:log_path = /var/log/ansible.log</span><br></pre></td></tr></table></figure><h3 id="添加ansible的主机清单"><a href="#添加ansible的主机清单" class="headerlink" title="添加ansible的主机清单"></a>添加ansible的主机清单</h3><p><strong>vim &#x2F;etc&#x2F;ansible&#x2F;hosts</strong></p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[web] </span><br><span class="line">172.16.1.7 </span><br><span class="line">[backup] </span><br><span class="line">172.16.1.41 </span><br><span class="line">[nfs] </span><br><span class="line">172.16.1.31</span><br></pre></td></tr></table></figure><h3 id="ansible批量获取ip地址"><a href="#ansible批量获取ip地址" class="headerlink" title="ansible批量获取ip地址"></a>ansible批量获取ip地址</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ansible all -m shell -a &quot;ip a s ens33 | awk -F &#x27;[ /]+&#x27; &#x27;NR==3&#123;print \$3&#125;&#x27;&quot;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 笔记 </tag>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>python学习中的笔记</title>
       <link href="/2022/09/29/python%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E7%AC%94%E8%AE%B0/"/>
       <url>/2022/09/29/python%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E7%AC%94%E8%AE%B0/</url>
