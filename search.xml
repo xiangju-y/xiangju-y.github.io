@@ -8,7 +8,7 @@
       <link href="/2024/05/03/%E7%AC%94%E8%AE%B0/windows/vmware/"/>
       <url>/2024/05/03/%E7%AC%94%E8%AE%B0/windows/vmware/</url>
       
-        <content type="html"><![CDATA[<p>在本地新建一个bat脚本如：1.bat,vmware.bat</p><figure class="highlight bat"><table><tr><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off  </span><br><span class="line"><span class="built_in">setlocal</span> enabledelayedexpansion  </span><br><span class="line">  </span><br><span class="line"><span class="built_in">chcp</span> <span class="number">65001</span> &gt;<span class="built_in">nul</span> </span><br><span class="line"></span><br><span class="line">:: 这个是你虚拟机的路径,自行填写,提醒目前只支持指定一台虚拟机进行批量克隆</span><br><span class="line"><span class="built_in">CD</span> &quot;C:\Program Files (x86)\VMware\VMware Workstation\&quot;</span><br><span class="line"></span><br><span class="line">:: 创建要克隆虚拟机的快照,<span class="number">12</span>是快照名</span><br><span class="line">vmrun -T ws snapshot &quot;D:\vmkd\第二期环境\CentOS <span class="number">7</span> <span class="number">64</span> 位备份.vmx&quot; &quot;<span class="number">12</span>&quot;</span><br><span class="line"></span><br><span class="line">:: 这个是文件主机名和文件名例如：D:\vmkd\第二期环境\vmkd\web01-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">7</span>\web01-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">7</span>.vmx</span><br><span class="line">:: 这个vmlist格式为 <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> 这样的中间要有空格</span><br><span class="line"><span class="built_in">set</span> &quot;vmList=web03-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">9</span> web02-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">8</span> web01-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">7</span> m01-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">61</span> <span class="number">1</span>b02-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">6</span> db01-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">51</span> <span class="number">1</span>b01-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">5</span> backup-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">41</span> nfs01-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">31</span> web04-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">10</span>&quot; </span><br><span class="line"></span><br><span class="line">:: 这个路径D:\vmkd\第二期环境\CentOS <span class="number">7</span> <span class="number">64</span> 位备份.vmx选择你要克隆的虚拟机</span><br><span class="line">:: 这个路径D:\vmkd\第二期环境\vmkds\<span class="variable">%%n</span>\<span class="variable">%%n</span>.vmx这个是存放位置  linked为链接克隆，full为完整克隆 snapshot=&quot;<span class="number">12</span>&quot;是克隆虚拟机的快照名字另这个cloneName=&quot;<span class="variable">%%n</span>&quot;是克隆后的虚拟机名称</span><br><span class="line"><span class="keyword">for</span> <span class="variable">%%n</span> <span class="keyword">in</span> (<span class="variable">%vmList%</span>) <span class="keyword">do</span> ( </span><br><span class="line">    vmrun.exe -T ws clone &quot;D:\vmkd\第二期环境\CentOS <span class="number">7</span> <span class="number">64</span> 位备份.vmx&quot; &quot;D:\vmkd\第二期环境\vmkds\<span class="variable">%%n</span>\<span class="variable">%%n</span>.vmx&quot; linked -snapshot=&quot;<span class="number">12</span>&quot; -cloneName=&quot;<span class="variable">%%n</span>&quot;</span><br><span class="line"></span><br><span class="line">)  </span><br><span class="line">  </span><br><span class="line"><span class="built_in">endlocal</span></span><br></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<h1 id="在本地新建一个bat脚本如：1-bat-vmware-bat"><a href="#在本地新建一个bat脚本如：1-bat-vmware-bat" class="headerlink" title="在本地新建一个bat脚本如：1.bat,vmware.bat"></a>在本地新建一个bat脚本如：1.bat,vmware.bat</h1><figure class="highlight bat"><table><tr><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off  </span><br><span class="line"><span class="built_in">setlocal</span> enabledelayedexpansion  </span><br><span class="line">  </span><br><span class="line"><span class="built_in">chcp</span> <span class="number">65001</span> &gt;<span class="built_in">nul</span> </span><br><span class="line"></span><br><span class="line">:: 这个是你虚拟机的路径,自行填写,提醒目前只支持指定一台虚拟机进行批量克隆</span><br><span class="line"><span class="built_in">CD</span> &quot;C:\Program Files (x86)\VMware\VMware Workstation\&quot;</span><br><span class="line"></span><br><span class="line">:: 创建要克隆虚拟机的快照,<span class="number">12</span>是快照名</span><br><span class="line">vmrun -T ws snapshot &quot;D:\vmkd\第二期环境\CentOS <span class="number">7</span> <span class="number">64</span> 位备份.vmx&quot; &quot;<span class="number">12</span>&quot;</span><br><span class="line"></span><br><span class="line">:: 这个是文件主机名和文件名例如：D:\vmkd\第二期环境\vmkd\web01-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">7</span>\web01-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">7</span>.vmx</span><br><span class="line">:: 这个vmlist格式为 <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> 这样的中间要有空格</span><br><span class="line"><span class="built_in">set</span> &quot;vmList=web03-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">9</span> web02-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">8</span> web01-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">7</span> m01-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">61</span> <span class="number">1</span>b02-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">6</span> db01-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">51</span> <span class="number">1</span>b01-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">5</span> backup-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">41</span> nfs01-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">31</span> web04-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">10</span>&quot; </span><br><span class="line"></span><br><span class="line">:: 这个路径D:\vmkd\第二期环境\CentOS <span class="number">7</span> <span class="number">64</span> 位备份.vmx选择你要克隆的虚拟机</span><br><span class="line">:: 这个路径D:\vmkd\第二期环境\vmkds\<span class="variable">%%n</span>\<span class="variable">%%n</span>.vmx这个是存放位置  linked为链接克隆，full为完整克隆 snapshot=&quot;<span class="number">12</span>&quot;是克隆虚拟机的快照名字另这个cloneName=&quot;<span class="variable">%%n</span>&quot;是克隆后的虚拟机名称</span><br><span class="line"><span class="keyword">for</span> <span class="variable">%%n</span> <span class="keyword">in</span> (<span class="variable">%vmList%</span>) <span class="keyword">do</span> ( </span><br><span class="line">    vmrun.exe -T ws clone &quot;D:\vmkd\第二期环境\CentOS <span class="number">7</span> <span class="number">64</span> 位备份.vmx&quot; &quot;D:\vmkd\第二期环境\vmkds\<span class="variable">%%n</span>\<span class="variable">%%n</span>.vmx&quot; linked -snapshot=&quot;<span class="number">12</span>&quot; -cloneName=&quot;<span class="variable">%%n</span>&quot;</span><br><span class="line"></span><br><span class="line">)  </span><br><span class="line">  </span><br><span class="line"><span class="built_in">endlocal</span></span><br></pre></td></tr></table></figure>]]></content>
       
       
       <categories>
@@ -46,19 +46,6 @@
     
     
     <entry>
-      <title></title>
-      <link href="/2024/05/02/%E7%AC%94%E8%AE%B0/%E5%90%84%E7%A7%8D%E6%BA%90%E9%85%8D%E7%BD%AE/"/>
-      <url>/2024/05/02/%E7%AC%94%E8%AE%B0/%E5%90%84%E7%A7%8D%E6%BA%90%E9%85%8D%E7%BD%AE/</url>
-      
-        <content type="html"><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sed -e <span class="string">&#x27;s|^mirrorlist=|#mirrorlist=|g&#x27;</span> \</span><br><span class="line">    -e <span class="string">&#x27;s|^#baseurl=http://mirror.centos.org/centos|baseurl=https://mirrors.tuna.tsinghua.edu.cn/centos|g&#x27;</span> \</span><br><span class="line">    -i.bak \</span><br><span class="line">    /etc/yum.repos.d/CentOS-*.repo</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum makecache</span><br><span class="line">yum install epel-release -y</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sed -e <span class="string">&#x27;s!^metalink=!#metalink=!g&#x27;</span> \</span><br><span class="line">    -e <span class="string">&#x27;s!^#baseurl=!baseurl=!g&#x27;</span> \</span><br><span class="line">    -e <span class="string">&#x27;s!https\?://download\.fedoraproject\.org/pub/epel!https://mirrors.tuna.tsinghua.edu.cn/epel!g&#x27;</span> \</span><br><span class="line">    -e <span class="string">&#x27;s!https\?://download\.example/pub/epel!https://mirrors.tuna.tsinghua.edu.cn/epel!g&#x27;</span> \</span><br><span class="line">    -i /etc/yum.repos.d/epel&#123;,-testing&#125;.repo</span><br><span class="line"></span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum update -y &amp;&amp; yum upgrade -y</span><br></pre></td></tr></table></figure><pre><code>yum install -y vim tree wget bash-completion bashcompletion-extras lrzsz net-tools sysstat iotop iftop htop unzip nc nmap telnet bc psmisc httpd-tools bindutils nethogs expect cowsay sl</code></pre>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>ssh免密登录</title>
       <link href="/2024/05/02/%E7%AC%94%E8%AE%B0/ssh/"/>
       <url>/2024/05/02/%E7%AC%94%E8%AE%B0/ssh/</url>
@@ -80,19 +67,6 @@
             <tag> linux </tag>
             
         </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
-      <link href="/2024/05/01/%E7%AC%94%E8%AE%B0/1/"/>
-      <url>/2024/05/01/%E7%AC%94%E8%AE%B0/1/</url>
-      
-        <content type="html"><![CDATA[<figure class="highlight bash"><figcaption><span>&#123;cmd</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="built_in">ls</span></span><br></pre></td></tr></table></figure>]]></content>
-      
-      
       
     </entry>
     
@@ -278,6 +252,31 @@
         <tags>
             
             <tag> python </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>各种源配置</title>
+      <link href="/2021/09/20/%E7%AC%94%E8%AE%B0/%E5%90%84%E7%A7%8D%E6%BA%90%E9%85%8D%E7%BD%AE/"/>
+      <url>/2021/09/20/%E7%AC%94%E8%AE%B0/%E5%90%84%E7%A7%8D%E6%BA%90%E9%85%8D%E7%BD%AE/</url>
+      
+        <content type="html"><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sed -e <span class="string">&#x27;s|^mirrorlist=|#mirrorlist=|g&#x27;</span> \</span><br><span class="line">    -e <span class="string">&#x27;s|^#baseurl=http://mirror.centos.org/centos|baseurl=https://mirrors.tuna.tsinghua.edu.cn/centos|g&#x27;</span> \</span><br><span class="line">    -i.bak \</span><br><span class="line">    /etc/yum.repos.d/CentOS-*.repo</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum makecache</span><br><span class="line">yum install epel-release -y</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sed -e <span class="string">&#x27;s!^metalink=!#metalink=!g&#x27;</span> \</span><br><span class="line">    -e <span class="string">&#x27;s!^#baseurl=!baseurl=!g&#x27;</span> \</span><br><span class="line">    -e <span class="string">&#x27;s!https\?://download\.fedoraproject\.org/pub/epel!https://mirrors.tuna.tsinghua.edu.cn/epel!g&#x27;</span> \</span><br><span class="line">    -e <span class="string">&#x27;s!https\?://download\.example/pub/epel!https://mirrors.tuna.tsinghua.edu.cn/epel!g&#x27;</span> \</span><br><span class="line">    -i /etc/yum.repos.d/epel&#123;,-testing&#125;.repo</span><br><span class="line"></span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum update -y &amp;&amp; yum upgrade -y</span><br></pre></td></tr></table></figure><pre><code>yum install -y vim tree wget bash-completion bashcompletion-extras lrzsz net-tools sysstat iotop iftop htop unzip nc nmap telnet bc psmisc httpd-tools bindutils nethogs expect cowsay sl</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
             
         </tags>
       
