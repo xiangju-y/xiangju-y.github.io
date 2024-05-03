@@ -4,11 +4,160 @@
   
     
     <entry>
+      <title>vmware批量克隆虚拟机</title>
+      <link href="/2024/05/03/%E7%AC%94%E8%AE%B0/windows/vmware/"/>
+      <url>/2024/05/03/%E7%AC%94%E8%AE%B0/windows/vmware/</url>
+      
+        <content type="html"><![CDATA[<p>在本地新建一个bat脚本如：1.bat,vmware.bat</p><figure class="highlight bat"><table><tr><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off  </span><br><span class="line"><span class="built_in">setlocal</span> enabledelayedexpansion  </span><br><span class="line">  </span><br><span class="line"><span class="built_in">chcp</span> <span class="number">65001</span> &gt;<span class="built_in">nul</span> </span><br><span class="line"></span><br><span class="line">:: 这个是你虚拟机的路径,自行填写,提醒目前只支持指定一台虚拟机进行批量克隆</span><br><span class="line"><span class="built_in">CD</span> &quot;C:\Program Files (x86)\VMware\VMware Workstation\&quot;</span><br><span class="line"></span><br><span class="line">:: 创建要克隆虚拟机的快照,<span class="number">12</span>是快照名</span><br><span class="line">vmrun -T ws snapshot &quot;D:\vmkd\第二期环境\CentOS <span class="number">7</span> <span class="number">64</span> 位备份.vmx&quot; &quot;<span class="number">12</span>&quot;</span><br><span class="line"></span><br><span class="line">:: 这个是文件主机名和文件名例如：D:\vmkd\第二期环境\vmkd\web01-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">7</span>\web01-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">7</span>.vmx</span><br><span class="line">:: 这个vmlist格式为 <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> 这样的中间要有空格</span><br><span class="line"><span class="built_in">set</span> &quot;vmList=web03-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">9</span> web02-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">8</span> web01-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">7</span> m01-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">61</span> <span class="number">1</span>b02-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">6</span> db01-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">51</span> <span class="number">1</span>b01-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">5</span> backup-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">41</span> nfs01-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">31</span> web04-<span class="number">10</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">10</span>&quot; </span><br><span class="line"></span><br><span class="line">:: 这个路径D:\vmkd\第二期环境\CentOS <span class="number">7</span> <span class="number">64</span> 位备份.vmx选择你要克隆的虚拟机</span><br><span class="line">:: 这个路径D:\vmkd\第二期环境\vmkds\<span class="variable">%%n</span>\<span class="variable">%%n</span>.vmx这个是存放位置  linked为链接克隆，full为完整克隆 snapshot=&quot;<span class="number">12</span>&quot;是克隆虚拟机的快照名字另这个cloneName=&quot;<span class="variable">%%n</span>&quot;是克隆后的虚拟机名称</span><br><span class="line"><span class="keyword">for</span> <span class="variable">%%n</span> <span class="keyword">in</span> (<span class="variable">%vmList%</span>) <span class="keyword">do</span> ( </span><br><span class="line">    vmrun.exe -T ws clone &quot;D:\vmkd\第二期环境\CentOS <span class="number">7</span> <span class="number">64</span> 位备份.vmx&quot; &quot;D:\vmkd\第二期环境\vmkds\<span class="variable">%%n</span>\<span class="variable">%%n</span>.vmx&quot; linked -snapshot=&quot;<span class="number">12</span>&quot; -cloneName=&quot;<span class="variable">%%n</span>&quot;</span><br><span class="line"></span><br><span class="line">)  </span><br><span class="line">  </span><br><span class="line"><span class="built_in">endlocal</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> windows </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 笔记 </tag>
+            
+            <tag> vmware </tag>
+            
+            <tag> windows </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/2024/05/02/%E7%AC%94%E8%AE%B0/linux/crontab/"/>
+      <url>/2024/05/02/%E7%AC%94%E8%AE%B0/linux/crontab/</url>
+      
+        <content type="html"><![CDATA[<p>crontab -e编辑当前用户的定时任务<br>crontab -l 查看当前用户的定时任务</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/2024/05/02/%E7%AC%94%E8%AE%B0/%E5%90%84%E7%A7%8D%E6%BA%90%E9%85%8D%E7%BD%AE/"/>
+      <url>/2024/05/02/%E7%AC%94%E8%AE%B0/%E5%90%84%E7%A7%8D%E6%BA%90%E9%85%8D%E7%BD%AE/</url>
+      
+        <content type="html"><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sed -e <span class="string">&#x27;s|^mirrorlist=|#mirrorlist=|g&#x27;</span> \</span><br><span class="line">    -e <span class="string">&#x27;s|^#baseurl=http://mirror.centos.org/centos|baseurl=https://mirrors.tuna.tsinghua.edu.cn/centos|g&#x27;</span> \</span><br><span class="line">    -i.bak \</span><br><span class="line">    /etc/yum.repos.d/CentOS-*.repo</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum makecache</span><br><span class="line">yum install epel-release -y</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sed -e <span class="string">&#x27;s!^metalink=!#metalink=!g&#x27;</span> \</span><br><span class="line">    -e <span class="string">&#x27;s!^#baseurl=!baseurl=!g&#x27;</span> \</span><br><span class="line">    -e <span class="string">&#x27;s!https\?://download\.fedoraproject\.org/pub/epel!https://mirrors.tuna.tsinghua.edu.cn/epel!g&#x27;</span> \</span><br><span class="line">    -e <span class="string">&#x27;s!https\?://download\.example/pub/epel!https://mirrors.tuna.tsinghua.edu.cn/epel!g&#x27;</span> \</span><br><span class="line">    -i /etc/yum.repos.d/epel&#123;,-testing&#125;.repo</span><br><span class="line"></span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum update -y &amp;&amp; yum upgrade -y</span><br></pre></td></tr></table></figure><pre><code>yum install -y vim tree wget bash-completion bashcompletion-extras lrzsz net-tools sysstat iotop iftop htop unzip nc nmap telnet bc psmisc httpd-tools bindutils nethogs expect cowsay sl</code></pre>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>ssh免密登录</title>
+      <link href="/2024/05/02/%E7%AC%94%E8%AE%B0/ssh/"/>
+      <url>/2024/05/02/%E7%AC%94%E8%AE%B0/ssh/</url>
+      
+        <content type="html"><![CDATA[<h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h1><h2 id="1-ERROR-Host-key-verification-failed"><a href="#1-ERROR-Host-key-verification-failed" class="headerlink" title="1.ERROR: Host key verification failed."></a>1.ERROR: Host key verification failed.</h2><p><code>ssh-copy-id -i ~/.ssh/id_ed25519.pub root@10.0.100.1</code></p><h3 id="1-1报错信息"><a href="#1-1报错信息" class="headerlink" title="1.1报错信息"></a>1.1报错信息</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: &quot;/c/Users/Administrator/.ssh/id_ed25519.pub&quot;</span><br><span class="line">/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed</span><br><span class="line"></span><br><span class="line">/usr/bin/ssh-copy-id: ERROR: @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><br><span class="line">ERROR: @    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @</span><br><span class="line">ERROR: @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><br><span class="line">ERROR: IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!</span><br><span class="line">ERROR: Someone could be eavesdropping on you right now (man-in-the-middle attack)!</span><br><span class="line">ERROR: It is also possible that a host key has just been changed.</span><br><span class="line">ERROR: The fingerprint for the ED25519 key sent by the remote host is</span><br><span class="line">ERROR: SHA256:hldheoaTxodVcyGltGuPUP+zQOiV7BsJw8I9WSX4OFc.</span><br><span class="line">ERROR: Please contact your system administrator.</span><br><span class="line">ERROR: Add correct host key in /c/Users/Administrator/.ssh/known_hosts to get rid of this message.</span><br><span class="line">ERROR: Offending ECDSA key in /c/Users/Administrator/.ssh/known_hosts:6  </span><br><span class="line">ERROR: Host key for 10.0.100.1 has changed and you have requested strict checking.</span><br><span class="line">ERROR: Host key verification failed.</span><br></pre></td></tr></table></figure><p>找到ssh文件下的known_hosts文件,将如有：<strong>10.0.100.1</strong>整行全部删除<br>known_hosts文件在<code>.ssh</code>下,不知道在哪，就看上面的报错信息</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ssh </tag>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/2024/05/01/%E7%AC%94%E8%AE%B0/1/"/>
+      <url>/2024/05/01/%E7%AC%94%E8%AE%B0/1/</url>
+      
+        <content type="html"><![CDATA[<figure class="highlight bash"><figcaption><span>&#123;cmd</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="built_in">ls</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>mklink</title>
+      <link href="/2024/04/25/%E7%AC%94%E8%AE%B0/windows/mklink/"/>
+      <url>/2024/04/25/%E7%AC%94%E8%AE%B0/windows/mklink/</url>
+      
+        <content type="html"><![CDATA[<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight cmd"><figcaption><span>&#123; cmd</span></figcaption><table><tr><td class="code"><pre><span class="line">mklink [[/d] | [/h] | [/j]] &lt;link&gt; &lt;target&gt;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> windows </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 笔记 </tag>
+            
+            <tag> windows </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>linux基础</title>
+      <link href="/2024/04/25/%E7%AC%94%E8%AE%B0/linux/linux/"/>
+      <url>/2024/04/25/%E7%AC%94%E8%AE%B0/linux/linux/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-基础知识"><a href="#1-基础知识" class="headerlink" title="1 基础知识"></a>1 基础知识</h1><h2 id="1-1-linux发行版"><a href="#1-1-linux发行版" class="headerlink" title="1.1 linux发行版"></a>1.1 linux发行版</h2><blockquote><p>本文基于centos7</p></blockquote><p> <strong>Linux的发行版本可以大体分为两类，一类是商业公司维护的发行版本，一类是社区组织维护的发行版本</strong></p><p><strong>目前常用的还是centos和ubuntu</strong></p><h4 id="Debian系列"><a href="#Debian系列" class="headerlink" title="Debian系列"></a><strong>Debian系列</strong></h4><ul><li><p>Debian：以其稳定性著称，是许多其他发行版（如Ubuntu）的基础。它遵循严格的自由软件原则，有着庞大的软件包库。</p></li><li><p>Ubuntu：基于Debian，以其用户友好和广泛的社区支持而流行，适合桌面用户和云环境。Ubuntu有多个变种，如Kubuntu（使用KDE桌面环境）、Xubuntu（使用Xfce）等。</p></li><li><p>Linux Mint：基于Ubuntu和Debian的发行版，以其易用性和美观的界面而受到好评。</p></li><li><p>Deepin：基于Debian的发行版，提供现代化的桌面环境和丰富的功能。</p></li></ul><h4 id="Redhat系列"><a href="#Redhat系列" class="headerlink" title="Redhat系列"></a><strong>Redhat系列</strong></h4><ul><li>Red Hat Enterprise Linux (RHEL)：面向企业级市场的发行版，以其出色的稳定性和技术支持闻名。CentOS曾是它的免费克隆版，但CentOS项目已转向CentOS Stream，作为RHEL的上游开发分支。</li><li>Fedora：由Red Hat赞助，是创新技术和软件的试验场，很多新技术会在Fedora中先行测试，之后可能被纳入RHEL。</li><li>CentOS 是基于Red Hat Enterprise Linux源代码构建的开源Linux发行版，继承了RHEL的稳定性和可靠性，同时提供了丰富的软件包资源和灵活的定制选项。CentOS经过严格的测试和验证，确保系统的高度稳定性和可靠性，适用于企业级应用。</li></ul><h4 id="Arch-Linux系列："><a href="#Arch-Linux系列：" class="headerlink" title="Arch Linux系列："></a><strong>Arch Linux系列</strong>：</h4><ul><li>Arch Linux：面向高级用户和开发者，提供滚动更新的包管理系统和灵活的配置选项。</li><li>Manjaro：基于Arch Linux，但更注重用户友好性和易用性。</li></ul><h4 id="openSUSE系列"><a href="#openSUSE系列" class="headerlink" title="openSUSE系列"></a><strong>openSUSE系列</strong></h4><ul><li><p>openSUSE Leap：这是openSUSE的长期支持（LTS）版本，强调稳定性与安全性。Leap基于SUSE Linux Enterprise（SLE）的源代码，这意味着它拥有企业级的稳定性和兼容性。适合那些需要一个长期稳定环境的用户，如企业服务器部署或那些不希望频繁更新系统的桌面用户。</p></li><li><p>openSUSE Tumbleweed：这是一个滚动发布的版本，意味着用户可以获得最新的软件包和技术更新，无需等待新版本发布。Tumbleweed适合喜欢尝鲜、追求最新软件特性的开发者和爱好者。由于其滚动更新的特性，系统始终处于最新状态，但也可能包含较新的、未经长时间测试的软件包。</p></li></ul><h4 id="国产系统系列"><a href="#国产系统系列" class="headerlink" title="国产系统系列"></a><strong>国产系统系列</strong></h4><ul><li><p>优麒麟（UbuntuKylin）：基于Ubuntu的发行版，由中国CCN开源创新联合实验室与天津麒麟信息技术有限公司主导开发。它集成了大量符合中国用户习惯的软件和服务，如WPS Office、搜狗输入法等。</p></li><li><p>统一操作系统（UOS）：由多家中国企业如中国电子、武汉深之度、南京诚迈、中兴新支点等联合打造的Linux发行版，旨在提供一个统一、高效、安全的国产操作系统平台，广泛应用于政府、金融、教育等多个领域。</p></li><li><p>深度操作系统（Deepin）：由武汉深之度科技有限公司开发，以其美观的用户界面和良好的用户体验著称，特别适合桌面用户。Deepin操作系统内置了深度商店、深度音乐、深度影院等一整套自主开发的应用程序。</p></li><li><p>中标麒麟（NeoKylin）：由原中标软件和银河麒麟合并而成，主要面向中国政府和企业的服务器市场，提供高安全性、可靠性的解决方案。中标麒麟系统在政府机关、国防、能源、金融等行业有广泛应用。</p></li><li><p>红旗Linux：由中科红旗软件公司发行，属于Debian系，具有较长的历史，在国内有一定的市场份额，尤其在政府和教育行业有应用。</p></li></ul><h2 id="1-2-linux的目录结构"><a href="#1-2-linux的目录结构" class="headerlink" title="1.2 linux的目录结构"></a>1.2 linux的目录结构</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/：这是Linux文件系统的根目录，是所有其他目录的起点。</span><br><span class="line">/bin：此目录存放着用户二进制文件，也就是可执行文件。系统所需要的那些命令位于此目录或/sbin目录下。</span><br><span class="line">/boot：这个目录存放启动Linux时使用的一些核心文件，包括一些连接文件以及镜像文件。</span><br><span class="line">/dev：此目录包含了Linux系统中所有的设备文件。如硬盘用系统的第一块硬盘称为/dev/hda，第二块称为/dev/hdb等；光驱称为/dev/hdc等。</span><br><span class="line">/etc：这个目录是整个Linux系统最为关键的一个目录，几乎所有的系统配置文件都在这里。例如用户账户和密码文件、各种服务的配置文件等。</span><br><span class="line">/home：此目录是用户的宿主目录，是用户自己的文件存放目录。每个用户都有自己的目录，名称通常是以用户的账号命名的。</span><br><span class="line">/lib：这个目录存放着系统最基本的动态连接共享库，其作用类似于Windows里的DLL文件。几乎所有的应用程序都需要用到这些共享库。</span><br><span class="line">/media：Linux系统会自动识别一些设备，例如U盘、光驱等，当识别后，Linux会把识别的设备挂载到这个目录下。</span><br><span class="line">/mnt：临时挂载文件系统的目录，系统管理员可以临时将别的文件系统挂在这个目录下。</span><br><span class="line">/opt：这是给主机额外安装软件所摆放的目录。比如你安装一个ORACLE数据库则就可以放到这个目录下。默认是空的。</span><br><span class="line">/proc：此目录是一个虚拟的目录，它是系统内存的映射，我们可以通过直接访问这个目录来获取系统信息。</span><br><span class="line">/root：这是系统管理员（root）的家目录。</span><br><span class="line">/sbin：s就是Super User的意思，是超级用户使用的命令。这里存放的是系统管理员使用的系统管理程序。</span><br><span class="line">/srv：该目录存放一些服务启动之后需要提取的数据。</span><br><span class="line">/sys：这是linux2.6内核的一个很大的变化。该目录下安装了2.6内核中新出现的一个文件系统 sysfs 。sysfs文件系统集成了下面3种文件系统的信息：针对进程信息的proc文件系统、针对设备的devfs文件系统以及针对伪终端的devpts文件系统。该文件系统是内核设备树的一个直观反映。当一个内核对象被创建的时候，对应的文件和目录也在内核对象子系统中被创建。</span><br><span class="line">/tmp：这个目录是用来存放一些临时文件的。</span><br><span class="line">/usr：这是一个非常重要的目录，用户的很多应用程序和文件都放在这个目录下，类似于windows下的program files目录。</span><br><span class="line">/var：这个目录中存放着在不断扩充着的东西，我们习惯将那些经常被修改的目录放在这个目录下。包括各种日志文件。</span><br></pre></td></tr></table></figure><p>2.基础命令</p><p>man 命令</p><p>如：man ls</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd,ls</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">df,du,</span><br></pre></td></tr></table></figure><p>head,tail</p><p>history</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">shutdown –h now</span><br><span class="line">init 0</span><br><span class="line">halt</span><br></pre></td></tr></table></figure><p>mkdir,touch创建文件和文件夹</p><p>sc,scp,mv复制 跨主机复制 ，移动</p><p>echo,sudo,cat输入，提权，查看文件内容</p><p>pwd，当前文件路径</p><p>yum,apt,dnf,yarn 软件源</p><p>less,more翻页</p><p>vim,vi 编辑文本</p><p>wget,curl 请求</p><p>awk,sed,grep</p><p>|,</p><p>tar,unzip,</p><p>systemctl</p><p>chmod</p><p>lscpu查看cpu信息</p><p>men,find</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 笔记 </tag>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>shell脚本</title>
       <link href="/2024/04/16/%E7%AC%94%E8%AE%B0/linux/shell/"/>
       <url>/2024/04/16/%E7%AC%94%E8%AE%B0/linux/shell/</url>
       
-        <content type="html"><![CDATA[<h4 id="批量获取ip地址的"><a href="#批量获取ip地址的" class="headerlink" title="批量获取ip地址的"></a>批量获取ip地址的</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ip a s ens33 | awk -F &#x27;[ /]+&#x27; &#x27;NR==3&#123;print $3&#125;&#x27;</span><br></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<h4 id="批量获取ip地址的"><a href="#批量获取ip地址的" class="headerlink" title="批量获取ip地址的"></a>批量获取ip地址的</h4><!-- ```ip a s ens33 | awk -F '[ /]+' 'NR==3{print $3}'<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- ``` --&gt;</span><br><span class="line">```python &#123;cmd=true, class=&quot;line-numbers&quot;&#125;</span><br><span class="line">print(2*4)</span><br></pre></td></tr></table></figure>]]></content>
       
       
       <categories>
@@ -33,7 +182,7 @@
       <link href="/2024/04/16/%E7%AC%94%E8%AE%B0/linux/nfs/"/>
       <url>/2024/04/16/%E7%AC%94%E8%AE%B0/linux/nfs/</url>
       
-        <content type="html"><![CDATA[<h3 id="rsync报错解决rsync-mkstemp-failed-Permission-denied-13"><a href="#rsync报错解决rsync-mkstemp-failed-Permission-denied-13" class="headerlink" title="rsync报错解决rsync: mkstemp *******  failed: Permission denied (13)"></a>rsync报错解决rsync: mkstemp *******  failed: Permission denied (13)</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@backup tmp]<span class="comment">#rsync -avz /etc/hostname rsync_backup@10.0.0.41::data</span></span><br><span class="line">Password: </span><br><span class="line">sending incremental file list</span><br><span class="line">hostname</span><br><span class="line">rsync: mkstemp <span class="string">&quot;.hostname.Qo7WQD&quot;</span> (<span class="keyword">in</span> data) failed: Permission denied (13)</span><br><span class="line"></span><br><span class="line">sent 101 bytes  received 122 bytes  63.71 bytes/sec</span><br><span class="line">total size is 7  speedup is 0.03</span><br><span class="line">rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1179) [sender=3.1.2]</span><br></pre></td></tr></table></figure><h4 id="1-data文件夹权限问题"><a href="#1-data文件夹权限问题" class="headerlink" title="1.data文件夹权限问题"></a>1.data文件夹权限问题</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@backup data]<span class="comment"># ls -ld</span></span><br><span class="line">drwxr-xr-x. 2 root root 6 Apr 13 01:16 .</span><br></pre></td></tr></table></figure><p>使用 <strong>sudo chmod 777 &#x2F;data</strong>即可</p><h4 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h4>]]></content>
+        <content type="html"><![CDATA[<h4 id="客户端挂载"><a href="#客户端挂载" class="headerlink" title="客户端挂载"></a>客户端挂载</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum install -y nfs-utils </span><br><span class="line">mount -t nfs 172.16.1.31:/data /mnt</span><br></pre></td></tr></table></figure><h3 id="rsync报错解决rsync-mkstemp-failed-Permission-denied-13"><a href="#rsync报错解决rsync-mkstemp-failed-Permission-denied-13" class="headerlink" title="rsync报错解决rsync: mkstemp *******  failed: Permission denied (13)"></a>rsync报错解决rsync: mkstemp *******  failed: Permission denied (13)</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@backup tmp]<span class="comment">#rsync -avz /etc/hostname rsync_backup@10.0.0.41::data</span></span><br><span class="line">Password: </span><br><span class="line">sending incremental file list</span><br><span class="line">hostname</span><br><span class="line">rsync: mkstemp <span class="string">&quot;.hostname.Qo7WQD&quot;</span> (<span class="keyword">in</span> data) failed: Permission denied (13)</span><br><span class="line"></span><br><span class="line">sent 101 bytes  received 122 bytes  63.71 bytes/sec</span><br><span class="line">total size is 7  speedup is 0.03</span><br><span class="line">rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1179) [sender=3.1.2]</span><br></pre></td></tr></table></figure><h4 id="1-data文件夹权限问题"><a href="#1-data文件夹权限问题" class="headerlink" title="1.data文件夹权限问题"></a>1.data文件夹权限问题</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@backup data]<span class="comment"># ls -ld</span></span><br><span class="line">drwxr-xr-x. 2 root root 6 Apr 13 01:16 .</span><br></pre></td></tr></table></figure><p>使用 <strong>sudo chmod 777 &#x2F;data</strong>即可</p><h4 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h4>]]></content>
       
       
       <categories>
@@ -83,9 +232,38 @@
     
     
     <entry>
+      <title>linux python安装</title>
+      <link href="/2024/04/16/%E7%AC%94%E8%AE%B0/linux/linux%20python%E5%AE%89%E8%A3%85/"/>
+      <url>/2024/04/16/%E7%AC%94%E8%AE%B0/linux/linux%20python%E5%AE%89%E8%A3%85/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>注：本教程使用centos7进行安装</p></blockquote><h1 id="一、使用miniconda3-安装python"><a href="#一、使用miniconda3-安装python" class="headerlink" title="一、使用miniconda3 安装python"></a>一、使用miniconda3 安装python</h1><h3 id="1-1配置yum清华源（已配置跳过这步即可）"><a href="#1-1配置yum清华源（已配置跳过这步即可）" class="headerlink" title="1.1配置yum清华源（已配置跳过这步即可）"></a>1.1配置yum清华源（已配置跳过这步即可）</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sed -e &#x27;s|^mirrorlist=|#mirrorlist=|g&#x27; \</span><br><span class="line">    -e &#x27;s|^#baseurl=http://mirror.centos.org/centos|baseurl=https://mirrors.tuna.tsinghua.edu.cn/centos|g&#x27; \</span><br><span class="line">    -i.bak \</span><br><span class="line">    /etc/yum.repos.d/CentOS-*.repo</span><br></pre></td></tr></table></figure><blockquote><p>更新软件包缓存</p></blockquote><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum makecache</span><br></pre></td></tr></table></figure><blockquote><p>安装一些包</p></blockquote><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install wget vim net-tools -y</span><br></pre></td></tr></table></figure><h3 id="1-3开始安装miniconda3"><a href="#1-3开始安装miniconda3" class="headerlink" title="1.3开始安装miniconda3"></a>1.3开始安装miniconda3</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p ~/miniconda3</span><br><span class="line">wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh</span><br><span class="line">bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3</span><br><span class="line"><span class="built_in">rm</span> -rf ~/miniconda3/miniconda.sh</span><br><span class="line">~/miniconda3/bin/conda init bash</span><br><span class="line">~/miniconda3/bin/conda init zsh</span><br></pre></td></tr></table></figure><h4 id="1-3-1配置miniconda3清华源"><a href="#1-3-1配置miniconda3清华源" class="headerlink" title="1.3.1配置miniconda3清华源"></a>1.3.1配置miniconda3清华源</h4><p>vim ~&#x2F;.condarc</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">channels:</span><br><span class="line">  - defaults</span><br><span class="line">show_channel_urls: true</span><br><span class="line">default_channels:</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2</span><br><span class="line">custom_channels:</span><br><span class="line">  conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  msys2: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  bioconda: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  menpo: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  pytorch-lts: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud</span><br><span class="line">  deepmodeling: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 笔记 </tag>
+            
+            <tag> linux </tag>
+            
+            <tag> python </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>python学习中的笔记</title>
-      <link href="/2022/09/29/python%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E7%AC%94%E8%AE%B0/"/>
-      <url>/2022/09/29/python%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E7%AC%94%E8%AE%B0/</url>
+      <link href="/2022/09/29/%E7%AC%94%E8%AE%B0/python%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E7%AC%94%E8%AE%B0/"/>
+      <url>/2022/09/29/%E7%AC%94%E8%AE%B0/python%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E7%AC%94%E8%AE%B0/</url>
       
         <content type="html"><![CDATA[<h4 id="一、在文件中随机获取8个汉字"><a href="#一、在文件中随机获取8个汉字" class="headerlink" title="一、在文件中随机获取8个汉字"></a>一、在文件中随机获取8个汉字</h4><ul><li>用的是random模块sample方法：</li></ul><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;汉字大全.txt&quot;</span>, <span class="string">&quot;r&quot;</span>, encoding=<span class="string">&quot;gbk&quot;</span>) <span class="keyword">as</span> h:</span><br><span class="line">    res = h.readlines()</span><br><span class="line">    jiami = res[<span class="number">0</span>]</span><br><span class="line">x = random.sample(jiami, <span class="number">8</span>)</span><br><span class="line">s = <span class="string">&quot;&quot;</span>.join(x)</span><br><span class="line"><span class="built_in">print</span>(s)</span><br></pre></td></tr></table></figure><h4 id="二、在文件中替换内容"><a href="#二、在文件中替换内容" class="headerlink" title="二、在文件中替换内容"></a>二、在文件中替换内容</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#定义一个函数，带有4个参数</span></span><br><span class="line"><span class="comment">#x 表示要更新的文件名称</span></span><br><span class="line"><span class="comment">#y 表示要被替换的内容</span></span><br><span class="line"><span class="comment">#z 表示 替换后的内容</span></span><br><span class="line"><span class="comment">#s 默认参数为 1 表示只替换第一个匹配到的字符串</span></span><br><span class="line"><span class="comment"># 如果参数为 s = &#x27;g&#x27; 则表示全文替换</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">string_switch</span>(<span class="params">x,y,z,s=<span class="number">1</span></span>):</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(x, <span class="string">&quot;r&quot;</span>, encoding=<span class="string">&quot;utf-8&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="comment">#readlines以列表的形式将文件读出</span></span><br><span class="line">        lines = f.readlines()</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(x, <span class="string">&quot;w&quot;</span>, encoding=<span class="string">&quot;utf-8&quot;</span>) <span class="keyword">as</span> f_w:</span><br><span class="line">        <span class="comment">#定义一个数字，用来记录在读取文件时在列表中的位置</span></span><br><span class="line">        n = <span class="number">0</span></span><br><span class="line">        <span class="comment">#默认选项，只替换第一次匹配到的行中的字符串</span></span><br><span class="line">        <span class="keyword">if</span> s == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">for</span> line <span class="keyword">in</span> lines:</span><br><span class="line">                <span class="keyword">if</span> y <span class="keyword">in</span> line:</span><br><span class="line">                    line = line.replace(y,z)</span><br><span class="line">                    f_w.write(line)</span><br><span class="line">                    n += <span class="number">1</span></span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                f_w.write(line)</span><br><span class="line">                n += <span class="number">1</span></span><br><span class="line">            <span class="comment">#将剩余的文本内容继续输出</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n,<span class="built_in">len</span>(lines)):</span><br><span class="line">                f_w.write(lines[i])</span><br><span class="line">        <span class="comment">#全局匹配替换</span></span><br><span class="line">        <span class="keyword">elif</span> s == <span class="string">&#x27;g&#x27;</span>:</span><br><span class="line">            <span class="keyword">for</span> line <span class="keyword">in</span> lines:</span><br><span class="line">                <span class="keyword">if</span> y <span class="keyword">in</span> line:</span><br><span class="line">                    line = line.replace(y,z)</span><br><span class="line">                f_w.write(line)</span><br></pre></td></tr></table></figure>]]></content>
       
@@ -109,8 +287,8 @@
     
     <entry>
       <title>记录一次小米路由器4c刷机过程</title>
-      <link href="/2021/09/20/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A84c%E5%88%B7%E6%9C%BA%E8%BF%87%E7%A8%8B/"/>
-      <url>/2021/09/20/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A84c%E5%88%B7%E6%9C%BA%E8%BF%87%E7%A8%8B/</url>
+      <link href="/2021/09/20/%E7%AC%94%E8%AE%B0/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A84c%E5%88%B7%E6%9C%BA%E8%BF%87%E7%A8%8B/"/>
+      <url>/2021/09/20/%E7%AC%94%E8%AE%B0/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A84c%E5%88%B7%E6%9C%BA%E8%BF%87%E7%A8%8B/</url>
       
         <content type="html"><![CDATA[<p>虽然最后刷失败，但整体是没有问题的，刷失败的原因是自己手欠，失败是因为自己刷了多次，导致有问题</p><h2 id="一、准备工作"><a href="#一、准备工作" class="headerlink" title="一、准备工作"></a>一、准备工作</h2><h3 id="1-开启win10的Telnet服务"><a href="#1-开启win10的Telnet服务" class="headerlink" title="1.开启win10的Telnet服务"></a>1.开启win10的Telnet服务</h3><p>在控制面板–程序–启动或关闭Windows功能里的Telnet程序</p><h3 id="2-安装Python"><a href="#2-安装Python" class="headerlink" title="2.安装Python"></a>2.安装Python</h3><p>去网上搜</p><h4 id="注意：安装的时候一定要勾选add-python-3-x-x-to-path"><a href="#注意：安装的时候一定要勾选add-python-3-x-x-to-path" class="headerlink" title="注意：安装的时候一定要勾选add python 3.x.x to path"></a>注意：安装的时候一定要勾选add python 3.x.x to path</h4><p>这是环境变量</p><p>然后打开 cmd 命令窗口</p><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">python -m pip install --upgrade pip   </span><br><span class="line">pip install pycryptodome</span><br><span class="line">pip install requests</span><br></pre></td></tr></table></figure><h2 id="二、开始"><a href="#二、开始" class="headerlink" title="二、开始"></a>二、开始</h2><h4 id="1-下载网盘里的东西"><a href="#1-下载网盘里的东西" class="headerlink" title="1.下载网盘里的东西"></a>1.下载网盘里的东西</h4><p>下载地址<a href="https://wws.lanzoui.com/ivJzktaxvbe">蓝奏云</a></p><p>网盘失效就进这个<a href="https://pan.lanzou.com/ivJzktaxvbe">https://pan.lanzou.com/ivJzktaxvbe</a></p><p>解压文件里的R3GV2 patches.rar</p><p>然后打开0.start_main.bat 在命令窗中输入路由器后台管理员密码后即可自动运行</p><h5 id="注：电脑和路由器记得连接"><a href="#注：电脑和路由器记得连接" class="headerlink" title="注：电脑和路由器记得连接"></a>注：电脑和路由器记得连接</h5><h4 id="2-telent-连接"><a href="#2-telent-连接" class="headerlink" title="2.telent 连接"></a>2.telent 连接</h4><p>Telnet连接路由器，先备份eeprom，在Telnet中输入</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">dd</span> <span class="keyword">if</span>=/dev/mtd3 of=/tmp/eeprom.bin</span><br></pre></td></tr></table></figure><p>此后在系统资源管理器访问 <a href="ftp://192.168.31.1/">ftp://192.168.31.1/</a></p><p>或者用winSCP也行(这里我直接用的资源管理器)</p><p>把eeprom.bin备份到本地，在tmp目录里</p><h3 id="两种方法"><a href="#两种方法" class="headerlink" title="两种方法"></a>两种方法</h3><h4 id="一-在Telnet中输入"><a href="#一-在Telnet中输入" class="headerlink" title="一.在Telnet中输入"></a>一.在Telnet中输入</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /tmp &amp;&amp; wget http://totos-s.top:8081/breed/breed-mt7688-reset38.bin &amp;&amp; <span class="built_in">mv</span> breed-mt7688-reset38.bin breed.bin</span><br></pre></td></tr></table></figure><p>获取Breed.bin,然后输入</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mtd write breed.bin Bootloader</span><br></pre></td></tr></table></figure><p>刷入Breed.bin，</p><h4 id="二-也可以直接把网盘文件里的breed-bin复制到tmp目录内"><a href="#二-也可以直接把网盘文件里的breed-bin复制到tmp目录内" class="headerlink" title="二.也可以直接把网盘文件里的breed.bin复制到tmp目录内"></a>二.也可以直接把网盘文件里的breed.bin复制到tmp目录内</h4><p>输入</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mtd write /tmp/breed.bin Bootloader</span><br></pre></td></tr></table></figure><p>刷入Breed</p><h2 id="三、刷入后"><a href="#三、刷入后" class="headerlink" title="三、刷入后"></a>三、刷入后</h2><p>刷入breed后将小米路由器断电</p><p>按住复位键，然后通电</p><h4 id="注：不要松"><a href="#注：不要松" class="headerlink" title="注：不要松"></a>注：不要松</h4><p>看到路由器上的灯闪烁几下后</p><p>就可以松开了</p><p>然后打开电脑浏览器输入192.168.1.1</p><p>进入breed web</p><p><img src="https://gitee.com/jidain/tu/raw/master/img/1501133112.png" alt="img"></p><p>刷入备份的Eeprom.bin后路由器重启，重复上面步骤</p><p>最后一步刷入固件<br>固件可以去网上找</p><h2 id="注：刷机有风险，操作请谨慎"><a href="#注：刷机有风险，操作请谨慎" class="headerlink" title="注：刷机有风险，操作请谨慎"></a>注：刷机有风险，操作请谨慎</h2>]]></content>
       
