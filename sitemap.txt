@@ -30,5 +30,5 @@ http://example.com/tags/vmware/
 http://example.com/tags/windows/
 http://example.com/tags/linux-%E7%AC%94%E8%AE%B0/
 http://example.com/categories/python/
-http://example.com/categories/windows/
 http://example.com/categories/linux/
+http://example.com/categories/windows/
