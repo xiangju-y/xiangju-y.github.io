@@ -51,5 +51,5 @@ http://example.com/tags/linux-%E7%AC%94%E8%AE%B0/
 http://example.com/categories/ssh/
 http://example.com/categories/linux/
 http://example.com/categories/windows/
-http://example.com/categories/python/
 http://example.com/categories/%E7%AC%94%E8%AE%B0/
+http://example.com/categories/python/
