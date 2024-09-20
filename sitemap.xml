@@ -2,34 +2,115 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://example.com/2024/09/13/%E7%AC%94%E8%AE%B0/%E4%B8%80%E4%BA%9B%E6%96%87%E4%BB%B6/%E9%A1%B9%E7%9B%AE/%E7%BB%BC%E5%90%88%E9%A1%B9%E7%9B%AE%E5%A4%A7%E5%85%A8/%E5%A4%A7%E8%87%B4%E8%99%9A%E6%8B%9F%E6%9C%BA/</loc>
+    <loc>http://example.com/2024/05/02/%E4%B8%80%E4%BA%9B%E6%96%87%E4%BB%B6/%E9%A1%B9%E7%9B%AE/java_pig/java_pig/</loc>
     
-    <lastmod>2024-09-12</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/2024/09/13/%E7%AC%94%E8%AE%B0/prometheus/prometheus/</loc>
-    
-    <lastmod>2024-08-11</lastmod>
+    <lastmod>2024-09-20</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://example.com/2024/09/13/%E7%AC%94%E8%AE%B0/prometheus/discovery_node_exporter/</loc>
+    <loc>http://example.com/2024/05/03/%E4%B8%80%E4%BA%9B%E6%96%87%E4%BB%B6/%E9%A1%B9%E7%9B%AE/%E7%BB%BC%E5%90%88%E9%A1%B9%E7%9B%AE%E5%A4%A7%E5%85%A8/%E5%A4%A7%E8%87%B4%E8%99%9A%E6%8B%9F%E6%9C%BA/</loc>
     
-    <lastmod>2024-08-11</lastmod>
+    <lastmod>2024-09-20</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://example.com/2024/04/16/%E7%AC%94%E8%AE%B0/nginx%E6%80%BB%E7%BB%93/dokcer/</loc>
+    <loc>http://example.com/2024/05/03/zabbix/zabbix/</loc>
+    
+    <lastmod>2024-09-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/2024/05/02/linux/%E6%B7%98%E5%AE%9Dnginx/</loc>
+    
+    <lastmod>2024-09-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/2024/05/03/windows/vmware/</loc>
+    
+    <lastmod>2024-09-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/2024/05/19/windows/%E5%A5%87%E5%AE%89%E4%BF%A1%E5%A4%A9%E6%93%8E%E9%80%80%E5%87%BA%E6%9C%89%E5%AF%86%E7%A0%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc>
+    
+    <lastmod>2024-09-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/2024/04/16/linux/nfs/</loc>
+    
+    <lastmod>2024-09-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/2024/09/20/linux/mysql/</loc>
+    
+    <lastmod>2024-09-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/2024/04/16/linux/shell%E8%84%9A%E6%9C%AC/</loc>
+    
+    <lastmod>2024-09-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/2024/04/25/linux/linux/</loc>
+    
+    <lastmod>2024-09-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/2024/06/19/linux/history%E8%A1%8C%E5%8F%B7%E9%97%AE%E9%A2%98/</loc>
+    
+    <lastmod>2024-09-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/2024/09/20/linux/crontab/</loc>
+    
+    <lastmod>2024-09-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/2024/04/16/linux/dokcer/</loc>
     
     <lastmod>2024-07-25</lastmod>
     
@@ -38,7 +119,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/2024/09/13/%E7%AC%94%E8%AE%B0/nginx%E6%80%BB%E7%BB%93/1/</loc>
+    <loc>http://example.com/2024/05/19/linux/%E5%90%84%E7%A7%8D%E6%BA%90%E9%85%8D%E7%BD%AE/</loc>
     
     <lastmod>2024-07-09</lastmod>
     
@@ -47,16 +128,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/2024/05/19/%E7%AC%94%E8%AE%B0/linux/%E5%90%84%E7%A7%8D%E6%BA%90%E9%85%8D%E7%BD%AE/</loc>
-    
-    <lastmod>2024-07-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/2024/04/25/%E7%AC%94%E8%AE%B0/windows/vscode/</loc>
+    <loc>http://example.com/2024/04/25/windows/vscode/</loc>
     
     <lastmod>2024-06-03</lastmod>
     
@@ -65,7 +137,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/2024/04/16/%E7%AC%94%E8%AE%B0/linux/shell%E8%84%9A%E6%9C%AC/</loc>
+    <loc>http://example.com/2024/05/02/windows/ssh/</loc>
     
     <lastmod>2024-05-31</lastmod>
     
@@ -74,25 +146,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/2024/05/03/%E7%AC%94%E8%AE%B0/windows/vmware/</loc>
-    
-    <lastmod>2024-05-31</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/2024/05/02/%E7%AC%94%E8%AE%B0/ssh/</loc>
-    
-    <lastmod>2024-05-31</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/2024/04/16/%E7%AC%94%E8%AE%B0/%E4%B8%80%E4%BA%9B%E6%96%87%E4%BB%B6/%E9%A1%B9%E7%9B%AE/lifeRestart/</loc>
+    <loc>http://example.com/2024/04/16/%E4%B8%80%E4%BA%9B%E6%96%87%E4%BB%B6/%E9%A1%B9%E7%9B%AE/lifeRestart/</loc>
     
     <lastmod>2024-05-26</lastmod>
     
@@ -101,7 +155,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/2024/09/13/%E7%AC%94%E8%AE%B0/zabbix/zabbix-agen2%E6%89%B9%E9%87%8F%E9%83%A8%E7%BD%B2/</loc>
+    <loc>http://example.com/2024/04/16/linux/ansible/</loc>
     
     <lastmod>2024-05-23</lastmod>
     
@@ -110,34 +164,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/2024/05/19/%E7%AC%94%E8%AE%B0/windows/%E5%A5%87%E5%AE%89%E4%BF%A1%E5%A4%A9%E6%93%8E%E9%80%80%E5%87%BA%E6%9C%89%E5%AF%86%E7%A0%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc>
-    
-    <lastmod>2024-05-23</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/2024/04/16/%E7%AC%94%E8%AE%B0/linux/ansible/</loc>
-    
-    <lastmod>2024-05-23</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/2024/09/13/%E7%AC%94%E8%AE%B0/zabbix/1/</loc>
-    
-    <lastmod>2024-05-23</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/2024/09/13/%E7%AC%94%E8%AE%B0/%E4%B8%80%E4%BA%9B%E6%96%87%E4%BB%B6/%E9%A1%B9%E7%9B%AE/centos7-php7.2%E5%AE%89%E8%A3%85/</loc>
+    <loc>http://example.com/2024/09/13/%E4%B8%80%E4%BA%9B%E6%96%87%E4%BB%B6/%E9%A1%B9%E7%9B%AE/centos7-php7.2%E5%AE%89%E8%A3%85/</loc>
     
     <lastmod>2024-05-22</lastmod>
     
@@ -146,7 +173,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/2024/09/13/%E7%AC%94%E8%AE%B0/%E4%B8%80%E4%BA%9B%E6%96%87%E4%BB%B6/%E6%80%BB%E7%BB%93/</loc>
+    <loc>http://example.com/2024/04/01/%E6%9D%82%E8%B0%88/%E8%AE%B0%E5%BD%95%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E5%81%9C%E6%9C%BA%E7%9A%84%E4%B8%80%E6%AC%A1%E8%AE%B0%E5%BD%95/</loc>
     
     <lastmod>2024-05-19</lastmod>
     
@@ -155,7 +182,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/2024/09/13/%E7%AC%94%E8%AE%B0/%E4%B8%80%E4%BA%9B%E6%96%87%E4%BB%B6/%E6%B7%98%E5%AE%9Dnginx/</loc>
+    <loc>http://example.com/2021/09/20/%E6%9D%82%E8%B0%88/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A84c%E5%88%B7%E6%9C%BA%E8%BF%87%E7%A8%8B/</loc>
     
     <lastmod>2024-05-19</lastmod>
     
@@ -164,7 +191,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/2024/04/25/%E7%AC%94%E8%AE%B0/linux/linux/</loc>
+    <loc>http://example.com/2022/09/29/python/python%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E7%AC%94%E8%AE%B0/</loc>
     
     <lastmod>2024-05-19</lastmod>
     
@@ -173,7 +200,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/2024/09/13/%E7%AC%94%E8%AE%B0/linux/history%E8%A1%8C%E5%8F%B7%E9%97%AE%E9%A2%98/</loc>
+    <loc>http://example.com/2024/05/11/linux/nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D/</loc>
     
     <lastmod>2024-05-19</lastmod>
     
@@ -182,52 +209,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/2024/04/01/%E7%AC%94%E8%AE%B0/%E6%9D%82%E8%B0%88/%E8%AE%B0%E5%BD%95%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E5%81%9C%E6%9C%BA%E7%9A%84%E4%B8%80%E6%AC%A1%E8%AE%B0%E5%BD%95/</loc>
-    
-    <lastmod>2024-05-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/2021/09/20/%E7%AC%94%E8%AE%B0/%E6%9D%82%E8%B0%88/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A84c%E5%88%B7%E6%9C%BA%E8%BF%87%E7%A8%8B/</loc>
-    
-    <lastmod>2024-05-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/2022/09/29/%E7%AC%94%E8%AE%B0/python/python%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E7%AC%94%E8%AE%B0/</loc>
-    
-    <lastmod>2024-05-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/2024/05/11/%E7%AC%94%E8%AE%B0/linux/nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D/</loc>
-    
-    <lastmod>2024-05-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/2024/09/13/%E7%AC%94%E8%AE%B0/%E4%B8%80%E4%BA%9B%E6%96%87%E4%BB%B6/%E9%A1%B9%E7%9B%AE/%E6%95%B0%E6%8D%AE%E5%BA%93/mariadb/</loc>
-    
-    <lastmod>2024-05-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/2024/05/11/%E7%AC%94%E8%AE%B0/linux/nginx%E5%AE%89%E8%A3%85/</loc>
+    <loc>http://example.com/2024/05/11/linux/nginx%E5%AE%89%E8%A3%85/</loc>
     
     <lastmod>2024-05-18</lastmod>
     
@@ -236,54 +218,9 @@
   </url>
   
   <url>
-    <loc>http://example.com/2024/09/13/%E7%AC%94%E8%AE%B0/nginx%E6%80%BB%E7%BB%93/mysql/</loc>
-    
-    <lastmod>2024-05-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/2024/09/13/%E7%AC%94%E8%AE%B0/nginx%E6%80%BB%E7%BB%93/nfs/</loc>
-    
-    <lastmod>2024-05-15</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/2024/04/16/%E7%AC%94%E8%AE%B0/linux/nfs/</loc>
-    
-    <lastmod>2024-05-15</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/2024/04/25/%E7%AC%94%E8%AE%B0/windows/mklink/</loc>
+    <loc>http://example.com/2024/04/16/linux/linux%20python%E5%AE%89%E8%A3%85/</loc>
     
     <lastmod>2024-05-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/2024/04/16/%E7%AC%94%E8%AE%B0/linux/linux%20python%E5%AE%89%E8%A3%85/</loc>
-    
-    <lastmod>2024-05-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/2024/09/13/%E7%AC%94%E8%AE%B0/linux/crontab/</loc>
-    
-    <lastmod>2024-05-02</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -413,6 +350,13 @@
   </url>
   
   <url>
+    <loc>http://example.com/tags/zabbix/</loc>
+    <lastmod>2024-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://example.com/tags/centos7/</loc>
     <lastmod>2024-09-20</lastmod>
     <changefreq>weekly</changefreq>
@@ -436,13 +380,6 @@
 
   
   <url>
-    <loc>http://example.com/categories/ssh/</loc>
-    <lastmod>2024-09-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://example.com/categories/linux/</loc>
     <lastmod>2024-09-20</lastmod>
     <changefreq>weekly</changefreq>
@@ -450,7 +387,14 @@
   </url>
   
   <url>
-    <loc>http://example.com/categories/windows/</loc>
+    <loc>http://example.com/categories/python/</loc>
+    <lastmod>2024-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/categories/ssh/</loc>
     <lastmod>2024-09-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -464,7 +408,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/categories/python/</loc>
+    <loc>http://example.com/categories/windows/</loc>
     <lastmod>2024-09-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
