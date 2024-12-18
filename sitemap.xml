@@ -380,14 +380,7 @@
 
   
   <url>
-    <loc>http://example.com/categories/windows/</loc>
-    <lastmod>2024-12-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/categories/ssh/</loc>
+    <loc>http://example.com/categories/linux/</loc>
     <lastmod>2024-12-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -401,7 +394,14 @@
   </url>
   
   <url>
-    <loc>http://example.com/categories/linux/</loc>
+    <loc>http://example.com/categories/windows/</loc>
+    <lastmod>2024-12-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/categories/ssh/</loc>
     <lastmod>2024-12-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
