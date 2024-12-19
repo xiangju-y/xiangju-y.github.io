@@ -468,6 +468,33 @@
     
     
     <entry>
+      <title>nginx的一些配置</title>
+      <link href="/2024/04/16/%E6%9C%AA%E5%88%86%E7%B1%BB/nginx%E7%9A%84%E4%B8%80%E4%BA%9B%E9%85%8D%E7%BD%AE/"/>
+      <url>/2024/04/16/%E6%9C%AA%E5%88%86%E7%B1%BB/nginx%E7%9A%84%E4%B8%80%E4%BA%9B%E9%85%8D%E7%BD%AE/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>yum install yum-utils -y</p></blockquote><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat &gt; /etc/yum.repos.d/nginx.repo &lt;&lt;&quot;EOF&quot;</span><br><span class="line">[nginx-stable]</span><br><span class="line">name=nginx stable repo</span><br><span class="line">baseurl=http://nginx.org/packages/centos/$releasever/$basearch/</span><br><span class="line">gpgcheck=1</span><br><span class="line">enabled=1</span><br><span class="line">gpgkey=https://nginx.org/keys/nginx_signing.key</span><br><span class="line">module_hotfixes=true</span><br><span class="line"></span><br><span class="line">[nginx-mainline]</span><br><span class="line">name=nginx mainline repo</span><br><span class="line">baseurl=http://nginx.org/packages/mainline/centos/$releasever/$basearch/</span><br><span class="line">gpgcheck=1</span><br><span class="line">enabled=0</span><br><span class="line">gpgkey=https://nginx.org/keys/nginx_signing.key</span><br><span class="line">module_hotfixes=true</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure><p>yum install nginx-1.26.0 -y<br>rpm -qa nginx<br>rpm -ql nginx<br>systemctl enable nginx &amp;&amp;systemctl start nginx</p><figure class="highlight plaintext"><figcaption><span>alist.molu.com</span></figcaption><table><tr><td class="code"><pre><span class="line">10.0.0.3 harbor.molu.com</span><br><span class="line">正向代理</span><br><span class="line">反向代理</span><br><span class="line">负载</span><br><span class="line">upstream模块,upstream指令实现负载均衡.创建分组/池塘,proxy_pass中使用即可</span><br><span class="line">[root@lb01 conf.d]# cat cfg_lb.conf </span><br><span class="line">upstream cfg_pools&#123;  主要是这部分进行的</span><br><span class="line">  server 10.0.0.7:80;</span><br><span class="line">  server 10.0.0.8:80;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  cfg.molu.com;</span><br><span class="line">    access_log  /var/log/nginx/cfg-access.log  main;</span><br><span class="line">    error_log /var/log/nginx/cfg-error.log notice;    </span><br><span class="line">    location / &#123;</span><br><span class="line">proxy_pass http://cfg_pools; ##cfg_pools是上面定义的名称</span><br><span class="line">proxy_set_header Host $http_host;</span><br><span class="line">proxy_set_header X-Real-Ip $remote_addr;</span><br><span class="line">proxy_set_header X-Forwarded-For</span><br><span class="line">$proxy_add_x_forwarded_for;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>[root@web01 ~]# cat &gt; &#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;status.conf &lt;&lt;’EOF’<br>server {<br>  listen 8000;<br>  location &#x2F; {<br>    stub_status;<br>  }<br>}<br>EOF</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 笔记 </tag>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>docker安装和配置</title>
       <link href="/2024/04/16/linux/dokcer/"/>
       <url>/2024/04/16/linux/dokcer/</url>
