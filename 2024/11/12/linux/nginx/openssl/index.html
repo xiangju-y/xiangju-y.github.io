@@ -1,0 +1,598 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><!-- hexo injector head_begin start --><script>(() => {
+                    const sw = navigator.serviceWorker;
+                    if (sw) {
+                        sw.register('/sw.js')
+                            .then(async (registration) => {
+                            console.log('SWPP 注册成功');
+                            try {
+                                // @ts-ignore
+                                await registration.periodicSync.register("update", {
+                                    minInterval: 24 * 60 * 60 * 1000
+                                });
+                            }
+                            catch (e) {
+                                console.log('Periodic Sync 注册失败', e);
+                            }
+                        })
+                            .catch(err => console.error('SWPP 注册失败', err));
+                    }
+                    else {
+                        console.warn('当前浏览器不支持 SW');
+                    }
+                })()</script><!-- hexo injector head_begin end --><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>相聚就是缘 | 相聚就是缘</title><meta name="author" content="相聚就是缘"><meta name="copyright" content="相聚就是缘"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="相聚就是缘"><meta name="application-name" content="相聚就是缘"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="相聚就是缘"><meta property="og:url" content="http://example.com/2024/11/12/linux/nginx/openssl/index.html"><meta property="og:site_name" content="相聚就是缘"><meta property="og:description" content="yum remove openssl -yyum install -y gcc gcc-c++ zlib-devel libtool autoconf automake perl perl-IPC-Cmd perl-Data-Dumper perl-CPAN wgetwget https:&amp;#x2F;&amp;#x2F;www"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://img.paulzzh.com/touhou/random?_r_=7325c008-6fc0-9a45-0e32-6cd4fa28ca18"><meta property="article:author" content="相聚就是缘"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://img.paulzzh.com/touhou/random?_r_=7325c008-6fc0-9a45-0e32-6cd4fa28ca18"><meta name="description" content="yum remove openssl -yyum install -y gcc gcc-c++ zlib-devel libtool autoconf automake perl perl-IPC-Cmd perl-Data-Dumper perl-CPAN wgetwget https:&amp;#x2F;&amp;#x2F;www"><link rel="shortcut icon" href="/images/img/favicon.ico"><link rel="canonical" href="http://example.com/2024/11/12/linux/nginx/openssl/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//static.cloudflareinsights.com"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="manifest" href="/manifest.json"/><meta name="msapplication-TileColor" content="var(--anzhiyu-main)"/><link rel="mask-icon" href="/images/img/siteicon/apple-touch-icon.png" color="#5bbad5"/><link rel="apple-touch-icon" sizes="180x180" href="/images/img/siteicon/apple-touch-icon.png"/><link rel="apple-touch-icon-precomposed" sizes="180x180" href="/images/img/siteicon/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="/images/img/siteicon/favicon32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/images/img/siteicon/favicon16.png"/><link rel="bookmark" href="/images/img/siteicon/apple-touch-icon.png"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2048-2732.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2732-2048.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1668-2388.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2388-1668.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1536-2048.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2048-1536.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1668-2224.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2224-1668.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1620-2160.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2160-1620.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1290-2796.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2796-1290.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1179-2556.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2556-1179.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1284-2778.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2778-1284.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1170-2532.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2532-1170.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1125-2436.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2436-1125.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1242-2688.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2688-1242.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-828-1792.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1792-828.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1242-2208.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2208-1242.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-750-1334.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1334-750.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-640-1136.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1136-640.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a47703759cc4186a0dada0e931850fd8";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script defer="defer" data-pjax="data-pjax" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;f17ee4081fd046249a38d63acd333e36&quot;}"></script><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2024/07/27/125766904/ba62475f396df9de3316a08ed9e65d86_5680958632268053399..png"},
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: undefined,
+  LA51: {"enable":true,"ck":"3H0SQxTtQhrCLrjj","LingQueMonitorID":"3H0SQxTtQhrCLrjj"},
+  greetingBox: undefined,
+  twikooEnvId: 'https://xiangju.netlify.app/.netlify/functions/twikoo',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: undefined,
+  authorStatus: {"skills":["🤖️ 数码科技爱好者","🏃 脚踏实地行动派"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '相聚就是缘',
+  title: '相聚就是缘',
+  postAI: '',
+  pageFillDescription: '这里是重点需要将里面配置为最终服务端需要的域名或者这里可以写多个能够自行添加',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-09-15 19:36:23',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="referrer" content="no-referrer" /><!-- hexo injector head_end start --><script defer src="/sw-dom.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="相聚就是缘" type="application/atom+xml">
+</head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="/images/img/512.png"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="/" title="博客"><img class="back-menu-item-icon" src="/images/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" href="/docs" title="文档项目"><img class="back-menu-item-icon" src="https://image.anheyu.com/favicon.ico" alt="文档项目"/><span class="back-menu-item-text">文档项目</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">相聚就是缘</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/docs/"><span> 项目文档</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li></ul></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/about/"><span> 关于本人</span></a></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/centos7/" style="font-size: 1.05rem;">centos7<sup>2</sup></a><a href="/tags/linux/" style="font-size: 1.05rem;">linux<sup>13</sup></a><a href="/tags/linux-%E7%AC%94%E8%AE%B0/" style="font-size: 1.05rem;">linux - 笔记<sup>1</sup></a><a href="/tags/python/" style="font-size: 1.05rem;">python<sup>2</sup></a><a href="/tags/ssh/" style="font-size: 1.05rem;">ssh<sup>2</sup></a><a href="/tags/vmware/" style="font-size: 1.05rem;">vmware<sup>1</sup></a><a href="/tags/windows/" style="font-size: 1.05rem;">windows<sup>6</sup></a><a href="/tags/zabbix/" style="font-size: 1.05rem;">zabbix<sup>1</sup></a><a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 1.05rem;">笔记<sup>11</sup></a><a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8%E5%88%B7%E6%9C%BA/" style="font-size: 1.05rem;">路由器刷机<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/11/"><span class="card-archive-list-date">十一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">8</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">四月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">8</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/09/"><span class="card-archive-list-date">九月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/09/"><span class="card-archive-list-date">九月 2021</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="article-meta tags"></span></div></div><h1 class="post-title" itemprop="name headline">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2024-11-12T14:30:54.131Z" title="发表于 2024-11-12 22:30:54">2024-11-12</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2024-09-15T11:36:23.089Z" title="更新于 2024-09-15 19:36:23">2024-09-15</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">1.9k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>11分钟</span></span><span class="post-meta-separator"></span><span id="" data-flag-title=""><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="twikoo_visitors" title="访问量"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator"></span><span class="post-meta-commentcount"><i class="anzhiyufont anzhiyu-icon-comments post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2024/11/12/linux/nginx/openssl/#post-comment" tabindex="-1"><span id="twikoo-count"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></a></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://img.paulzzh.com/touhou/random?_r_=7325c008-6fc0-9a45-0e32-6cd4fa28ca18"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2024/11/12/linux/nginx/openssl/"><header><h1 id="CrawlerTitle" itemprop="name headline">无题</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">相聚就是缘</span><time itemprop="dateCreated datePublished" datetime="2024-11-12T14:30:54.131Z" title="发表于 2024-11-12 22:30:54">2024-11-12</time><time itemprop="dateCreated datePublished" datetime="2024-09-15T11:36:23.089Z" title="更新于 2024-09-15 19:36:23">2024-09-15</time></header><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum remove openssl -y</span><br><span class="line">yum install -y gcc gcc-c++ zlib-devel libtool autoconf automake perl perl-IPC-Cmd perl-Data-Dumper perl-CPAN wget</span><br><span class="line">wget https://www.openssl.org/source/openssl-3.3.1.tar.gz</span><br><span class="line">tar -zxvf openssl-3.3.1.tar.gz</span><br><span class="line"><span class="built_in">cd</span> openssl-3.3.1/</span><br><span class="line">./config --prefix=/usr/local/openssl-3.3.1 shared zlib-dynamic enable-ec_nistp_64_gcc_128</span><br><span class="line">make &amp;&amp; make install_sw</span><br><span class="line"><span class="built_in">ln</span> -s /usr/local/openssl-3.3.1/lib64/libcrypto.so.3 /usr/lib64/libcrypto.so.3</span><br><span class="line"><span class="built_in">ln</span> -s /usr/local/openssl-3.3.1/lib64/libssl.so.3 /usr/lib64/libssl.so.3</span><br><span class="line"><span class="built_in">ln</span> -s /usr/local/openssl-3.3.1/bin/openssl /usr/bin/openssl</span><br><span class="line"><span class="built_in">cat</span> &gt;&gt; ~/.bash_profile&lt;&lt;<span class="string">&#x27;EOF&#x27;</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/usr/local/openssl-3.3.1/bin</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="built_in">source</span> ~/.bash_profile</span><br><span class="line"></span><br><span class="line"><span class="built_in">mkdir</span> /usr/local/openssl-3.3.1/ssl</span><br><span class="line"><span class="built_in">mv</span> openssl-3.3.1.tar.gz/ssl/openssl.cnf /usr/local/openssl-3.3.1/ssl/</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cat</span> &gt; openssl.cnf &lt;&lt;<span class="string">&#x27;EOF&#x27;</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># OpenSSL example configuration file.</span></span><br><span class="line"><span class="comment"># See doc/man5/config.pod for more info.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># This is mostly being used for generation of certificate requests,</span></span><br><span class="line"><span class="comment"># but may be used for auto loading of providers</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Note that you can include other files from the main configuration</span></span><br><span class="line"><span class="comment"># file using the .include directive.</span></span><br><span class="line"><span class="comment">#.include filename</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># This definition stops the following lines choking if HOME isn&#x27;t</span></span><br><span class="line"><span class="comment"># defined.</span></span><br><span class="line">HOME            = .</span><br><span class="line"></span><br><span class="line"><span class="comment"># Use this in order to automatically load providers.</span></span><br><span class="line">openssl_conf = openssl_init</span><br><span class="line"></span><br><span class="line"><span class="comment"># Comment out the next line to ignore configuration errors</span></span><br><span class="line">config_diagnostics = 1</span><br><span class="line"></span><br><span class="line"><span class="comment"># Extra OBJECT IDENTIFIER info:</span></span><br><span class="line"><span class="comment"># oid_file       = $ENV::HOME/.oid</span></span><br><span class="line">oid_section = new_oids</span><br><span class="line"></span><br><span class="line"><span class="comment"># To use this configuration file with the &quot;-extfile&quot; option of the</span></span><br><span class="line"><span class="comment"># &quot;openssl x509&quot; utility, name here the section containing the</span></span><br><span class="line"><span class="comment"># X.509v3 extensions to use:</span></span><br><span class="line"><span class="comment"># extensions        =</span></span><br><span class="line"><span class="comment"># (Alternatively, use a configuration file that has only</span></span><br><span class="line"><span class="comment"># X.509v3 extensions in its main [= default] section.)</span></span><br><span class="line"></span><br><span class="line">[ new_oids ]</span><br><span class="line"><span class="comment"># We can add new OIDs in here for use by &#x27;ca&#x27;, &#x27;req&#x27; and &#x27;ts&#x27;.</span></span><br><span class="line"><span class="comment"># Add a simple OID like this:</span></span><br><span class="line"><span class="comment"># testoid1=1.2.3.4</span></span><br><span class="line"><span class="comment"># Or use config file substitution like this:</span></span><br><span class="line"><span class="comment"># testoid2=$&#123;testoid1&#125;.5.6</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Policies used by the TSA examples.</span></span><br><span class="line">tsa_policy1 = 1.2.3.4.1</span><br><span class="line">tsa_policy2 = 1.2.3.4.5.6</span><br><span class="line">tsa_policy3 = 1.2.3.4.5.7</span><br><span class="line"></span><br><span class="line"><span class="comment"># For FIPS</span></span><br><span class="line"><span class="comment"># Optionally include a file that is generated by the OpenSSL fipsinstall</span></span><br><span class="line"><span class="comment"># application. This file contains configuration data required by the OpenSSL</span></span><br><span class="line"><span class="comment"># fips provider. It contains a named section e.g. [fips_sect] which is</span></span><br><span class="line"><span class="comment"># referenced from the [provider_sect] below.</span></span><br><span class="line"><span class="comment"># Refer to the OpenSSL security policy for more information.</span></span><br><span class="line"><span class="comment"># .include fipsmodule.cnf</span></span><br><span class="line"></span><br><span class="line">[openssl_init]</span><br><span class="line">providers = provider_sect</span><br><span class="line"></span><br><span class="line"><span class="comment"># List of providers to load</span></span><br><span class="line">[provider_sect]</span><br><span class="line">default = default_sect</span><br><span class="line"><span class="comment"># The fips section name should match the section name inside the</span></span><br><span class="line"><span class="comment"># included fipsmodule.cnf.</span></span><br><span class="line"><span class="comment"># fips = fips_sect</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># If no providers are activated explicitly, the default one is activated implicitly.</span></span><br><span class="line"><span class="comment"># See man 7 OSSL_PROVIDER-default for more details.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># If you add a section explicitly activating any other provider(s), you most</span></span><br><span class="line"><span class="comment"># probably need to explicitly activate the default provider, otherwise it</span></span><br><span class="line"><span class="comment"># becomes unavailable in openssl.  As a consequence applications depending on</span></span><br><span class="line"><span class="comment"># OpenSSL may not work correctly which could lead to significant system</span></span><br><span class="line"><span class="comment"># problems including inability to remotely access the system.</span></span><br><span class="line">[default_sect]</span><br><span class="line"><span class="comment"># activate = 1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">####################################################################</span></span><br><span class="line">[ ca ]</span><br><span class="line">default_ca  = CA_default        <span class="comment"># The default ca section</span></span><br><span class="line"></span><br><span class="line"><span class="comment">####################################################################</span></span><br><span class="line">[ CA_default ]</span><br><span class="line"></span><br><span class="line"><span class="built_in">dir</span>     = ./demoCA      <span class="comment"># Where everything is kept</span></span><br><span class="line">certs       = <span class="variable">$dir</span>/certs        <span class="comment"># Where the issued certs are kept</span></span><br><span class="line">crl_dir     = <span class="variable">$dir</span>/crl      <span class="comment"># Where the issued crl are kept</span></span><br><span class="line">database    = <span class="variable">$dir</span>/index.txt    <span class="comment"># database index file.</span></span><br><span class="line"><span class="comment">#unique_subject = no            # Set to &#x27;no&#x27; to allow creation of</span></span><br><span class="line">                    <span class="comment"># several certs with same subject.</span></span><br><span class="line">new_certs_dir   = <span class="variable">$dir</span>/newcerts     <span class="comment"># default place for new certs.</span></span><br><span class="line"></span><br><span class="line">certificate = <span class="variable">$dir</span>/cacert.pem   <span class="comment"># The CA certificate</span></span><br><span class="line">serial      = <span class="variable">$dir</span>/serial       <span class="comment"># The current serial number</span></span><br><span class="line">crlnumber   = <span class="variable">$dir</span>/crlnumber    <span class="comment"># the current crl number</span></span><br><span class="line">                    <span class="comment"># must be commented out to leave a V1 CRL</span></span><br><span class="line">crl     = <span class="variable">$dir</span>/crl.pem      <span class="comment"># The current CRL</span></span><br><span class="line">private_key = <span class="variable">$dir</span>/private/cakey.pem <span class="comment"># The private key</span></span><br><span class="line"></span><br><span class="line">x509_extensions = usr_cert      <span class="comment"># The extensions to add to the cert</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Comment out the following two lines for the &quot;traditional&quot;</span></span><br><span class="line"><span class="comment"># (and highly broken) format.</span></span><br><span class="line">name_opt    = ca_default        <span class="comment"># Subject Name options</span></span><br><span class="line">cert_opt    = ca_default        <span class="comment"># Certificate field options</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Extension copying option: use with caution.</span></span><br><span class="line"><span class="comment"># copy_extensions = copy</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Extensions to add to a CRL. Note: Netscape communicator chokes on V2 CRLs</span></span><br><span class="line"><span class="comment"># so this is commented out by default to leave a V1 CRL.</span></span><br><span class="line"><span class="comment"># crlnumber must also be commented out to leave a V1 CRL.</span></span><br><span class="line"><span class="comment"># crl_extensions    = crl_ext</span></span><br><span class="line"></span><br><span class="line">default_days    = 365           <span class="comment"># how long to certify for</span></span><br><span class="line">default_crl_days= 30            <span class="comment"># how long before next CRL</span></span><br><span class="line">default_md  = default       <span class="comment"># use public key default MD</span></span><br><span class="line">preserve    = no            <span class="comment"># keep passed DN ordering</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># A few difference way of specifying how similar the request should look</span></span><br><span class="line"><span class="comment"># For type CA, the listed attributes must be the same, and the optional</span></span><br><span class="line"><span class="comment"># and supplied fields are just that :-)</span></span><br><span class="line">policy      = policy_match</span><br><span class="line"></span><br><span class="line"><span class="comment"># For the CA policy</span></span><br><span class="line">[ policy_match ]</span><br><span class="line">countryName     = match</span><br><span class="line">stateOrProvinceName = match</span><br><span class="line">organizationName    = match</span><br><span class="line">organizationalUnitName  = optional</span><br><span class="line">commonName      = supplied</span><br><span class="line">emailAddress        = optional</span><br><span class="line"></span><br><span class="line"><span class="comment"># For the &#x27;anything&#x27; policy</span></span><br><span class="line"><span class="comment"># At this point in time, you must list all acceptable &#x27;object&#x27;</span></span><br><span class="line"><span class="comment"># types.</span></span><br><span class="line">[ policy_anything ]</span><br><span class="line">countryName     = optional</span><br><span class="line">stateOrProvinceName = optional</span><br><span class="line">localityName        = optional</span><br><span class="line">organizationName    = optional</span><br><span class="line">organizationalUnitName  = optional</span><br><span class="line">commonName      = supplied</span><br><span class="line">emailAddress        = optional</span><br><span class="line"></span><br><span class="line"><span class="comment">####################################################################</span></span><br><span class="line">[ req ]</span><br><span class="line">default_bits        = 2048</span><br><span class="line">default_keyfile     = privkey.pem</span><br><span class="line">distinguished_name  = req_distinguished_name</span><br><span class="line">attributes      = req_attributes</span><br><span class="line">x509_extensions = v3_ca <span class="comment"># The extensions to add to the self signed cert</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Passwords for private keys if not present they will be prompted for</span></span><br><span class="line"><span class="comment"># input_password = secret</span></span><br><span class="line"><span class="comment"># output_password = secret</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># This sets a mask for permitted string types. There are several options.</span></span><br><span class="line"><span class="comment"># default: PrintableString, T61String, BMPString.</span></span><br><span class="line"><span class="comment"># pkix   : PrintableString, BMPString (PKIX recommendation before 2004)</span></span><br><span class="line"><span class="comment"># utf8only: only UTF8Strings (PKIX recommendation after 2004).</span></span><br><span class="line"><span class="comment"># nombstr : PrintableString, T61String (no BMPStrings or UTF8Strings).</span></span><br><span class="line"><span class="comment"># MASK:XXXX a literal mask value.</span></span><br><span class="line"><span class="comment"># WARNING: ancient versions of Netscape crash on BMPStrings or UTF8Strings.</span></span><br><span class="line">string_mask = utf8only</span><br><span class="line"></span><br><span class="line"><span class="comment"># req_extensions = v3_req # The extensions to add to a certificate request</span></span><br><span class="line"></span><br><span class="line">[ req_distinguished_name ]</span><br><span class="line">countryName         = Country Name (2 letter code)</span><br><span class="line">countryName_default     = AU</span><br><span class="line">countryName_min         = 2</span><br><span class="line">countryName_max         = 2</span><br><span class="line"></span><br><span class="line">stateOrProvinceName     = State or Province Name (full name)</span><br><span class="line">stateOrProvinceName_default = Some-State</span><br><span class="line"></span><br><span class="line">localityName            = Locality Name (eg, city)</span><br><span class="line"></span><br><span class="line">0.organizationName      = Organization Name (eg, company)</span><br><span class="line">0.organizationName_default  = Internet Widgits Pty Ltd</span><br><span class="line"></span><br><span class="line"><span class="comment"># we can do this but it is not needed normally :-)</span></span><br><span class="line"><span class="comment">#1.organizationName     = Second Organization Name (eg, company)</span></span><br><span class="line"><span class="comment">#1.organizationName_default = World Wide Web Pty Ltd</span></span><br><span class="line"></span><br><span class="line">organizationalUnitName      = Organizational Unit Name (eg, section)</span><br><span class="line"><span class="comment">#organizationalUnitName_default =</span></span><br><span class="line"></span><br><span class="line">commonName          = Common Name (e.g. server FQDN or YOUR name)</span><br><span class="line">commonName_max          = 64</span><br><span class="line"></span><br><span class="line">emailAddress            = Email Address</span><br><span class="line">emailAddress_max        = 64</span><br><span class="line"></span><br><span class="line"><span class="comment"># SET-ex3           = SET extension number 3</span></span><br><span class="line"></span><br><span class="line">[ req_attributes ]</span><br><span class="line">challengePassword       = A challenge password</span><br><span class="line">challengePassword_min       = 4</span><br><span class="line">challengePassword_max       = 20</span><br><span class="line"></span><br><span class="line">unstructuredName        = An optional company name</span><br><span class="line"></span><br><span class="line">[ usr_cert ]</span><br><span class="line"></span><br><span class="line"><span class="comment"># These extensions are added when &#x27;ca&#x27; signs a request.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># This goes against PKIX guidelines but some CAs do it and some software</span></span><br><span class="line"><span class="comment"># requires this to avoid interpreting an end user certificate as a CA.</span></span><br><span class="line"></span><br><span class="line">basicConstraints=CA:FALSE</span><br><span class="line"></span><br><span class="line"><span class="comment"># This is typical in keyUsage for a client certificate.</span></span><br><span class="line"><span class="comment"># keyUsage = nonRepudiation, digitalSignature, keyEncipherment</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># PKIX recommendations harmless if included in all certificates.</span></span><br><span class="line">subjectKeyIdentifier=<span class="built_in">hash</span></span><br><span class="line">authorityKeyIdentifier=keyid,issuer</span><br><span class="line"></span><br><span class="line"><span class="comment"># This stuff is for subjectAltName and issuerAltname.</span></span><br><span class="line"><span class="comment"># Import the email address.</span></span><br><span class="line"><span class="comment"># subjectAltName=email:copy</span></span><br><span class="line"><span class="comment"># An alternative to produce certificates that aren&#x27;t</span></span><br><span class="line"><span class="comment"># deprecated according to PKIX.</span></span><br><span class="line"><span class="comment"># subjectAltName=email:move</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Copy subject details</span></span><br><span class="line"><span class="comment"># issuerAltName=issuer:copy</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># This is required for TSA certificates.</span></span><br><span class="line"><span class="comment"># extendedKeyUsage = critical,timeStamping</span></span><br><span class="line"></span><br><span class="line">[ v3_req ]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Extensions to add to a certificate request</span></span><br><span class="line"></span><br><span class="line">basicConstraints = CA:FALSE</span><br><span class="line">keyUsage = nonRepudiation, digitalSignature, keyEncipherment</span><br><span class="line">subjectAltName = @alt_names</span><br><span class="line"><span class="comment"># 这里是重点，需要将里面配置为最终服务端需要的域名或者IP</span></span><br><span class="line"><span class="comment"># 这里可以写多个，能够自行添加DNS.X = XXXXXX</span></span><br><span class="line">[ alt_names ]</span><br><span class="line">DNS.1 = molu.com</span><br><span class="line">DNS.2 = *.molu.com</span><br><span class="line">DNS.3 = 10.0.0.1</span><br><span class="line">DNS.4 = 10.0.0.3</span><br><span class="line">[ v3_ca ]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Extensions for a typical CA</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># PKIX recommendation.</span></span><br><span class="line"></span><br><span class="line">subjectKeyIdentifier=<span class="built_in">hash</span></span><br><span class="line"></span><br><span class="line">authorityKeyIdentifier=keyid:always,issuer</span><br><span class="line"></span><br><span class="line">basicConstraints = critical,CA:<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Key usage: this is typical for a CA certificate. However since it will</span></span><br><span class="line"><span class="comment"># prevent it being used as an test self-signed certificate it is best</span></span><br><span class="line"><span class="comment"># left out by default.</span></span><br><span class="line"><span class="comment"># keyUsage = cRLSign, keyCertSign</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Include email address in subject alt name: another PKIX recommendation</span></span><br><span class="line"><span class="comment"># subjectAltName=email:copy</span></span><br><span class="line"><span class="comment"># Copy issuer details</span></span><br><span class="line"><span class="comment"># issuerAltName=issuer:copy</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># DER hex encoding of an extension: beware experts only!</span></span><br><span class="line"><span class="comment"># obj=DER:02:03</span></span><br><span class="line"><span class="comment"># Where &#x27;obj&#x27; is a standard or added object</span></span><br><span class="line"><span class="comment"># You can even override a supported extension:</span></span><br><span class="line"><span class="comment"># basicConstraints= critical, DER:30:03:01:01:FF</span></span><br><span class="line"></span><br><span class="line">[ crl_ext ]</span><br><span class="line"></span><br><span class="line"><span class="comment"># CRL extensions.</span></span><br><span class="line"><span class="comment"># Only issuerAltName and authorityKeyIdentifier make any sense in a CRL.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># issuerAltName=issuer:copy</span></span><br><span class="line">authorityKeyIdentifier=keyid:always</span><br><span class="line"></span><br><span class="line">[ proxy_cert_ext ]</span><br><span class="line"><span class="comment"># These extensions should be added when creating a proxy certificate</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># This goes against PKIX guidelines but some CAs do it and some software</span></span><br><span class="line"><span class="comment"># requires this to avoid interpreting an end user certificate as a CA.</span></span><br><span class="line"></span><br><span class="line">basicConstraints=CA:FALSE</span><br><span class="line"></span><br><span class="line"><span class="comment"># This is typical in keyUsage for a client certificate.</span></span><br><span class="line"><span class="comment"># keyUsage = nonRepudiation, digitalSignature, keyEncipherment</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># PKIX recommendations harmless if included in all certificates.</span></span><br><span class="line">subjectKeyIdentifier=<span class="built_in">hash</span></span><br><span class="line">authorityKeyIdentifier=keyid,issuer</span><br><span class="line"></span><br><span class="line"><span class="comment"># This stuff is for subjectAltName and issuerAltname.</span></span><br><span class="line"><span class="comment"># Import the email address.</span></span><br><span class="line"><span class="comment"># subjectAltName=email:copy</span></span><br><span class="line"><span class="comment"># An alternative to produce certificates that aren&#x27;t</span></span><br><span class="line"><span class="comment"># deprecated according to PKIX.</span></span><br><span class="line"><span class="comment"># subjectAltName=email:move</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Copy subject details</span></span><br><span class="line"><span class="comment"># issuerAltName=issuer:copy</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># This really needs to be in place for it to be a proxy certificate.</span></span><br><span class="line">proxyCertInfo=critical,language:id-ppl-anyLanguage,pathlen:3,policy:foo</span><br><span class="line"></span><br><span class="line"><span class="comment">####################################################################</span></span><br><span class="line">[ tsa ]</span><br><span class="line"></span><br><span class="line">default_tsa = tsa_config1   <span class="comment"># the default TSA section</span></span><br><span class="line"></span><br><span class="line">[ tsa_config1 ]</span><br><span class="line"></span><br><span class="line"><span class="comment"># These are used by the TSA reply generation only.</span></span><br><span class="line"><span class="built_in">dir</span>     = ./demoCA      <span class="comment"># TSA root directory</span></span><br><span class="line">serial      = <span class="variable">$dir</span>/tsaserial    <span class="comment"># The current serial number (mandatory)</span></span><br><span class="line">crypto_device   = <span class="built_in">builtin</span>       <span class="comment"># OpenSSL engine to use for signing</span></span><br><span class="line">signer_cert = <span class="variable">$dir</span>/tsacert.pem  <span class="comment"># The TSA signing certificate</span></span><br><span class="line">                    <span class="comment"># (optional)</span></span><br><span class="line">certs       = <span class="variable">$dir</span>/cacert.pem   <span class="comment"># Certificate chain to include in reply</span></span><br><span class="line">                    <span class="comment"># (optional)</span></span><br><span class="line">signer_key  = <span class="variable">$dir</span>/private/tsakey.pem <span class="comment"># The TSA private key (optional)</span></span><br><span class="line">signer_digest  = sha256         <span class="comment"># Signing digest to use. (Optional)</span></span><br><span class="line">default_policy  = tsa_policy1       <span class="comment"># Policy if request did not specify it</span></span><br><span class="line">                    <span class="comment"># (optional)</span></span><br><span class="line">other_policies  = tsa_policy2, tsa_policy3  <span class="comment"># acceptable policies (optional)</span></span><br><span class="line">digests     = sha1, sha256, sha384, sha512  <span class="comment"># Acceptable message digests (mandatory)</span></span><br><span class="line">accuracy    = secs:1, millisecs:500, microsecs:100  <span class="comment"># (optional)</span></span><br><span class="line">clock_precision_digits  = 0 <span class="comment"># number of digits after dot. (optional)</span></span><br><span class="line">ordering        = <span class="built_in">yes</span>   <span class="comment"># Is ordering defined for timestamps?</span></span><br><span class="line">                <span class="comment"># (optional, default: no)</span></span><br><span class="line">tsa_name        = <span class="built_in">yes</span>   <span class="comment"># Must the TSA name be included in the reply?</span></span><br><span class="line">                <span class="comment"># (optional, default: no)</span></span><br><span class="line">ess_cert_id_chain   = no    <span class="comment"># Must the ESS cert id chain be included?</span></span><br><span class="line">                <span class="comment"># (optional, default: no)</span></span><br><span class="line">ess_cert_id_alg     = sha256    <span class="comment"># algorithm to compute certificate</span></span><br><span class="line">                <span class="comment"># identifier (optional, default: sha256)</span></span><br><span class="line"></span><br><span class="line">[insta] <span class="comment"># CMP using Insta Demo CA</span></span><br><span class="line"><span class="comment"># Message transfer</span></span><br><span class="line">server = pki.certificate.fi:8700</span><br><span class="line"><span class="comment"># proxy = # set this as far as needed, e.g., http://192.168.1.1:8080</span></span><br><span class="line"><span class="comment"># tls_use = 0</span></span><br><span class="line">path = pkix/</span><br><span class="line"></span><br><span class="line"><span class="comment"># Server authentication</span></span><br><span class="line">recipient = <span class="string">&quot;/C=FI/O=Insta Demo/CN=Insta Demo CA&quot;</span> <span class="comment"># or set srvcert or issuer</span></span><br><span class="line">ignore_keyusage = 1 <span class="comment"># potentially needed quirk</span></span><br><span class="line">unprotected_errors = 1 <span class="comment"># potentially needed quirk</span></span><br><span class="line">extracertsout = insta.extracerts.pem</span><br><span class="line"></span><br><span class="line"><span class="comment"># Client authentication</span></span><br><span class="line">ref = 3078 <span class="comment"># user identification</span></span><br><span class="line">secret = pass:insta <span class="comment"># can be used for both client and server side</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Generic message options</span></span><br><span class="line">cmd = ir <span class="comment"># default operation, can be overridden on cmd line with, e.g., kur</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Certificate enrollment</span></span><br><span class="line">subject = <span class="string">&quot;/CN=openssl-cmp-test&quot;</span></span><br><span class="line">newkey = insta.priv.pem</span><br><span class="line">out_trusted = apps/insta.ca.crt <span class="comment"># does not include keyUsage digitalSignature</span></span><br><span class="line">certout = insta.cert.pem</span><br><span class="line"></span><br><span class="line">[pbm] <span class="comment"># Password-based protection for Insta CA</span></span><br><span class="line"><span class="comment"># Server and client authentication</span></span><br><span class="line">ref = <span class="variable">$insta</span>::ref <span class="comment"># 3078</span></span><br><span class="line">secret = <span class="variable">$insta</span>::secret <span class="comment"># pass:insta</span></span><br><span class="line"></span><br><span class="line">[signature] <span class="comment"># Signature-based protection for Insta CA</span></span><br><span class="line"><span class="comment"># Server authentication</span></span><br><span class="line">trusted = <span class="variable">$insta</span>::out_trusted <span class="comment"># apps/insta.ca.crt</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Client authentication</span></span><br><span class="line">secret = <span class="comment"># disable PBM</span></span><br><span class="line">key = <span class="variable">$insta</span>::newkey <span class="comment"># insta.priv.pem</span></span><br><span class="line">cert = <span class="variable">$insta</span>::certout <span class="comment"># insta.cert.pem</span></span><br><span class="line"></span><br><span class="line">[ir]</span><br><span class="line">cmd = ir</span><br><span class="line"></span><br><span class="line">[cr]</span><br><span class="line">cmd = cr</span><br><span class="line"></span><br><span class="line">[kur]</span><br><span class="line"><span class="comment"># Certificate update</span></span><br><span class="line">cmd = kur</span><br><span class="line">oldcert = <span class="variable">$insta</span>::certout <span class="comment"># insta.cert.pem</span></span><br><span class="line"></span><br><span class="line">[rr]</span><br><span class="line"><span class="comment"># Certificate revocation</span></span><br><span class="line">cmd = rr</span><br><span class="line">oldcert = <span class="variable">$insta</span>::certout <span class="comment"># insta.cert.pem</span></span><br><span class="line"></span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+
+<p>openssl genrsa -out myCA.key 2048<br>openssl req -utf8 -new -x509 -days 36500 <br>    -subj “&#x2F;C&#x3D;CN&#x2F;ST&#x3D;Beijing&#x2F;L&#x3D;Beijing&#x2F;O&#x3D;example&#x2F;OU&#x3D;Personal&#x2F;CN&#x3D;MyPersonal Root CA” <br>    -key myCA.key <br>    -out myCA.cer</p>
+<p>openssl genrsa -out server.key 2048<br>openssl req -utf8 -config openssl.cnf -new -out server.req -key server.key<br>openssl x509 -req -extfile openssl.cnf -extensions v3_req -in server.req  -CAkey myCA.key -CA myCA.cer -sha384 -days 36500 -CAcreateserial -CAserial serial <br> -subj “&#x2F;C&#x3D;CN&#x2F;ST&#x3D;Beijing&#x2F;L&#x3D;Beijing&#x2F;O&#x3D;example&#x2F;OU&#x3D;Personal&#x2F;CN&#x3D;MyPersonal Root CA” <br> -out server.cer </p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/images/img/404.png&quot;" data-lazy-src="/images/img/512.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/images/img/404.png&quot;" data-lazy-src="/images/img/512.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">相聚就是缘</div><div class="post-copyright__author_desc">生活不是一成不变的，而是不断在变化中寻找平衡</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="http://example.com/2024/11/12/linux/nginx/openssl/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('http://example.com/2024/11/12/linux/nginx/openssl/')">相聚就是缘</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="http://example.com/2024/11/12/linux/nginx/openssl/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=相聚就是缘&amp;url=http://example.com/2024/11/12/linux/nginx/openssl/&amp;pic=https://img.paulzzh.com/touhou/random?_r_=7325c008-6fc0-9a45-0e32-6cd4fa28ca18" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">相聚就是缘</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"></div></div></div><div class="post_share"><div class="social-share" data-image="https://img.paulzzh.com/touhou/random?_r_=c5400565-a5ff-4cd1-1c7a-5687f2d6910c" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/09/20/linux/crontab/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/images/img/404.png&quot;" data-lazy-src="https://img.paulzzh.com/touhou/random?_r_=7e75f2a3-07a1-cac6-9cdf-898e9e070836" onerror="onerror=null;src='/images/img/404.png'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">crontab</div></div></a></div><div class="next-post pull-right"><a href="/2024/11/12/linux/gitlab/docker%20gitlab+%20gitlab-runnce%E9%83%A8%E7%BD%B2/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/images/img/404.png&quot;" data-lazy-src="https://img.paulzzh.com/touhou/random?_r_=c5400565-a5ff-4cd1-1c7a-5687f2d6910c" onerror="onerror=null;src='/images/img/404.png'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info"></div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/images/img/404.png&quot;" data-lazy-src="/images/img/512.png" onerror="this.onerror=null;this.src='/images/img/404.png'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/images/img/404.png&quot;" data-lazy-src="https://bu.dusays.com/2023/08/24/64e6ce9c507bb.png" alt="status"/></div></div><div class="author-info__description"></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">相聚就是缘</h1><div class="author-info__desc">生活不是一成不变的，而是不断在变化中寻找平衡</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/xiangju-y" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/372204786" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/11/12/linux/gitlab/docker%20gitlab+%20gitlab-runnce%E9%83%A8%E7%BD%B2/" title="无题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/images/img/404.png&quot;" data-lazy-src="https://img.paulzzh.com/touhou/random?_r_=c5400565-a5ff-4cd1-1c7a-5687f2d6910c" onerror="this.onerror=null;this.src='/images/img/404.png'" alt="无题"/></a><div class="content"><a class="title" href="/2024/11/12/linux/gitlab/docker%20gitlab+%20gitlab-runnce%E9%83%A8%E7%BD%B2/" title="无题">无题</a><time datetime="2024-11-12T14:30:54.162Z" title="发表于 2024-11-12 22:30:54">2024-11-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/11/12/linux/nginx/openssl/" title="无题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/images/img/404.png&quot;" data-lazy-src="https://img.paulzzh.com/touhou/random?_r_=7325c008-6fc0-9a45-0e32-6cd4fa28ca18" onerror="this.onerror=null;this.src='/images/img/404.png'" alt="无题"/></a><div class="content"><a class="title" href="/2024/11/12/linux/nginx/openssl/" title="无题">无题</a><time datetime="2024-11-12T14:30:54.131Z" title="发表于 2024-11-12 22:30:54">2024-11-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/20/linux/crontab/" title="crontab"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/images/img/404.png&quot;" data-lazy-src="https://img.paulzzh.com/touhou/random?_r_=7e75f2a3-07a1-cac6-9cdf-898e9e070836" onerror="this.onerror=null;this.src='/images/img/404.png'" alt="crontab"/></a><div class="content"><a class="title" href="/2024/09/20/linux/crontab/" title="crontab">crontab</a><time datetime="2024-09-20T07:44:14.000Z" title="发表于 2024-09-20 15:44:14">2024-09-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/20/linux/mysql/" title="centos7 mysql配置"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/images/img/404.png&quot;" data-lazy-src="https://img.paulzzh.com/touhou/random?_r_=477f03a5-f1c9-bfb3-3c56-a4899a513cce" onerror="this.onerror=null;this.src='/images/img/404.png'" alt="centos7 mysql配置"/></a><div class="content"><a class="title" href="/2024/09/20/linux/mysql/" title="centos7 mysql配置">centos7 mysql配置</a><time datetime="2024-09-19T16:00:00.000Z" title="发表于 2024-09-20 00:00:00">2024-09-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/06/19/linux/history%E8%A1%8C%E5%8F%B7%E9%97%AE%E9%A2%98/" title="history去掉行号"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/images/img/404.png&quot;" data-lazy-src="https://img.paulzzh.com/touhou/random?_r_=3de1b0ef-71be-0ea5-3e38-c6b43a36f1bb" onerror="this.onerror=null;this.src='/images/img/404.png'" alt="history去掉行号"/></a><div class="content"><a class="title" href="/2024/06/19/linux/history%E8%A1%8C%E5%8F%B7%E9%97%AE%E9%A2%98/" title="history去掉行号">history去掉行号</a><time datetime="2024-06-19T07:44:14.000Z" title="发表于 2024-06-19 15:44:14">2024-06-19</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="workboard"><img class="workSituationImg boardsign" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/images/img/404.png&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-上班摸鱼中.svg" alt="距离月入25k也就还差一个大佬带我~" title="距离月入25k也就还差一个大佬带我~"/><div id="runtimeTextTip"></div></div></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2021 - 2024 By <a class="footer-bar-link" href="/" title="相聚就是缘" target="_blank">相聚就是缘</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">23</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">5</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/images/img/404.png&quot;" data-lazy-src="/images/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" href="/docs" title="文档项目"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/images/img/404.png&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="文档项目"/><span class="back-menu-item-text">文档项目</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/docs/"><span> 项目文档</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li></ul></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/about/"><span> 关于本人</span></a></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/centos7/" style="font-size: 0.88rem;">centos7<sup>2</sup></a><a href="/tags/linux/" style="font-size: 0.88rem;">linux<sup>13</sup></a><a href="/tags/linux-%E7%AC%94%E8%AE%B0/" style="font-size: 0.88rem;">linux - 笔记<sup>1</sup></a><a href="/tags/python/" style="font-size: 0.88rem;">python<sup>2</sup></a><a href="/tags/ssh/" style="font-size: 0.88rem;">ssh<sup>2</sup></a><a href="/tags/vmware/" style="font-size: 0.88rem;">vmware<sup>1</sup></a><a href="/tags/windows/" style="font-size: 0.88rem;">windows<sup>6</sup></a><a href="/tags/zabbix/" style="font-size: 0.88rem;">zabbix<sup>1</sup></a><a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 0.88rem;">笔记<sup>11</sup></a><a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8%E5%88%B7%E6%9C%BA/" style="font-size: 0.88rem;">路由器刷机<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="https://cdn.cbd.int/hexo-theme-anzhiyu@1.6.14/source/js/utils.js"></script><script src="https://cdn.cbd.int/hexo-theme-anzhiyu@1.6.14/source/js/main.js"></script><script src="https://cdn.cbd.int/hexo-theme-anzhiyu@1.6.14/source/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.cbd.int/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("03/25/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2021 By 安知鱼 V1.6.14",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 相聚就是缘 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script async="async">(function () {
+  var grt = new Date("03/25/2021 00:00:00"); //设置网站上线时间
+  var now = new Date();
+  var dnum;
+  var hnum;
+  var mnum;
+  var snum;
+  var nowHour;
+
+  // 计算并更新天数、小时数、分钟数和秒数
+  function updateTime() {
+    now = new Date(); // 更新 now 的值
+    nowHour = now.getHours(); // 更新 nowHour 的值
+    var days = (now - grt) / 1000 / 60 / 60 / 24;
+    dnum = Math.floor(days);
+    var hours = (now - grt) / 1000 / 60 / 60 - 24 * dnum;
+    hnum = Math.floor(hours);
+    if (String(hnum).length == 1) {
+      hnum = "0" + hnum;
+    }
+    var minutes = (now - grt) / 1000 / 60 - 24 * 60 * dnum - 60 * hnum;
+    mnum = Math.floor(minutes);
+    if (String(mnum).length == 1) {
+      mnum = "0" + mnum;
+    }
+    var seconds = (now - grt) / 1000 - 24 * 60 * 60 * dnum - 60 * 60 * hnum - 60 * mnum;
+    snum = Math.round(seconds);
+    if (String(snum).length == 1) {
+      snum = "0" + snum;
+    }
+  }
+
+  // 更新网页中显示的网站运行时间
+  function updateHtml() {
+    const footer = document.getElementById("footer");
+    if (!footer) return
+    let currentTimeHtml = "";
+    if (nowHour < 18 && nowHour >= 9) {
+      // 如果是上班时间，默认就是"安知鱼-上班摸鱼中.svg"图片，不需要更改
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    } else {
+      // 如果是下班时间，插入"安知鱼-下班啦.svg"图片
+      let img = document.querySelector("#workboard .workSituationImg");
+      if (img != null) {
+        img.src = "https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-下班啦.svg";
+        img.title = "下班了就该开开心心的玩耍，嘿嘿~";
+        img.alt = "下班了就该开开心心的玩耍，嘿嘿~";
+      }
+
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    }
+
+    if (document.getElementById("runtimeTextTip")) {
+      document.getElementById("runtimeTextTip").innerHTML = currentTimeHtml;
+    }
+  }
+
+  setInterval(() => {
+    updateTime();
+    updateHtml();
+  }, 1000);
+})();</script><script src="https://cdn.cbd.int/hexo-theme-anzhiyu@1.6.14/source/js/search/local-search.js"></script><div class="js-pjax"><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://xiangju.netlify.app/.netlify/functions/twikoo',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://cdn.cbd.int/twikoo@1.6.39/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://xiangju.netlify.app/.netlify/functions/twikoo',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://xiangju.netlify.app/.netlify/functions/twikoo',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.cbd.int/twikoo@1.6.39/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="https://cdn.cbd.int/hexo-theme-anzhiyu@1.6.14/source/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
